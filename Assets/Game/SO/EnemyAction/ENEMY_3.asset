@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbb5540b44234148b5ca7b1eec67bc1, type: 3}
+  m_Name: ENEMY_3
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Action.EnemyActionBehaviorSO
+  RootAction:
+    rid: 5280083750616825965
+  references:
+    version: 2
+    RefIds:
+    - rid: 5280083750616825965
+      type: {class: RepeatEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _count: -1
+        Child:
+          rid: 5280083750616825966
+    - rid: 5280083750616825966
+      type: {class: IfPlayerInZone, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _boxExtent: {x: 5, y: 5, z: 5}
+        _canTranslateBack: 1
+        _falseAction:
+          rid: 5280083750616825967
+        _trueAction:
+          rid: 5280083750616825968
+    - rid: 5280083750616825967
+      type: {class: RotationEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _angleDelta: {x: 0, y: 90, z: 0}
+        _duration: 1
+    - rid: 5280083750616825968
+      type: {class: JumpEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _jumpForce: 10
