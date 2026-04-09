@@ -44,7 +44,7 @@ namespace Game.Enemy
                 }
                 else if (Velocity.y < 0)
                 {
-                    Velocity.y = -2f;
+                    Velocity.y = -2.0f;
                 }
             }
 
@@ -53,9 +53,10 @@ namespace Game.Enemy
                 _runtimeBehavior.RootAction.Process(this, Time.deltaTime);
             }
 
-            if (AngularVelocity != Vector3.zero)
+            if (AngularVelocity.sqrMagnitude > 0.0001f)
             {
-                transform.Rotate(AngularVelocity * Time.deltaTime, Space.Self);
+                float angleDeg = AngularVelocity.magnitude * Mathf.Rad2Deg * Time.deltaTime;
+                transform.rotation = Quaternion.AngleAxis(angleDeg, AngularVelocity.normalized) * transform.rotation;
             }
 
             Controller.Move(Velocity * Time.deltaTime);

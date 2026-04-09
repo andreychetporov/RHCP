@@ -15,10 +15,6 @@ namespace Game.Enemy.Action
         [SerializeField] private float _yMultiplier = 5.0f;
         [SerializeField] private float _moveSpeed = 1.0f;
 
-        [Header("Rotation")]
-        [SerializeField] private bool _lookAtVelocity = false;
-        [SerializeField] private float _rotationSpeed = 360.0f;
-
         [System.NonSerialized] private float _timer;
         [System.NonSerialized] private Vector3 _startPos;
 
@@ -29,7 +25,7 @@ namespace Game.Enemy.Action
         {
             base.Enter(owner);
 
-            _timer = 0f;
+            _timer = 0.0f;
             _startPos = owner.transform.position;
             
             _xTimeLength = _xCurve == null || _xCurve.length == 0 ? 0.0f : _xCurve.keys.Select(k => k.time).Max();
@@ -55,32 +51,17 @@ namespace Game.Enemy.Action
             Vector3 deltaMove = targetPos - owner.transform.position;
             owner.Velocity = deltaMove / dt;
 
-            if (_lookAtVelocity)
-            {
-                Vector3 moveDir = owner.Velocity.normalized;
-                float targetAngle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-
-                float currentAngle = owner.transform.eulerAngles.z;
-                float angleDelta = Mathf.DeltaAngle(currentAngle, targetAngle);
-
-                //owner.transform.rotation = Quaternion.AngleAxis(targetAngle, Vector3.forward);
-                owner.AngularVelocity = new Vector3(0f, 0f, Mathf.Sign(angleDelta) * _rotationSpeed);
-            }
-
             if (tX >= 1.0f && tY >= 1.0f)
             {
                 Status = ActionStatus.Success;
 
                 owner.Velocity = Vector3.zero;
-
-                if (_lookAtVelocity) { owner.AngularVelocity = Vector3.zero; }
             }
         }
 
         public override void Exit(EnemyActionController owner)
         {
             owner.Velocity = Vector3.zero;
-            if (_lookAtVelocity) { owner.AngularVelocity = Vector3.zero; }
         }
     }
 }

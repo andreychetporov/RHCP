@@ -342,7 +342,7 @@ Transform:
   m_GameObject: {fileID: 1275798548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.18, z: 0}
+  m_LocalPosition: {x: 0, y: 1.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f485e44b009ed4dafa6bfab70fa374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.EnemyActionController
-  _testSO: {fileID: 11400000, guid: 58e8ed57ae61fd7449c5559c8ac201a9, type: 2}
+  _testSO: {fileID: 11400000, guid: f8bb6c2d45541814db295d24fe93ae45, type: 2}
   _target: {fileID: 1793396101}
   Velocity: {x: 0, y: 0, z: 0}
   AngularVelocity: {x: 0, y: 0, z: 0}
@@ -657,7 +657,7 @@ Transform:
   m_GameObject: {fileID: 2076166482}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.82, y: 0, z: 0}
+  m_LocalPosition: {x: 0.83, y: 0, z: 0}
   m_LocalScale: {x: 0.61109, y: 1.0474082, z: 0.61109}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -738,7 +738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &2145477240
 MeshCollider:
   m_ObjectHideFlags: 0
