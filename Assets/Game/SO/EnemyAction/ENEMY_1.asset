@@ -27,7 +27,7 @@ MonoBehaviour:
       type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         Children:
-        - rid: 5280083750616825943
+        - rid: 6617142719275335744
         - rid: 5280083750616825947
         - rid: 5280083750616825941
     - rid: 5280083750616825941
@@ -35,23 +35,31 @@ MonoBehaviour:
       data:
         _angleDelta: {x: 0, y: 180, z: 0}
         _duration: 1
-    - rid: 5280083750616825943
-      type: {class: ParallelEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+    - rid: 5280083750616825947
+      type: {class: DelayEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        Children:
-        - rid: 5280083750616825945
-        - rid: 5280083750616825946
-    - rid: 5280083750616825945
+        _delayTime: 1
+    - rid: 6617142719275335744
+      type: {class: DoSecondWhileMainRunningEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _mainAction:
+          rid: 6617142719275335745
+        _secondAction:
+          rid: 6617142719275335746
+    - rid: 6617142719275335745
       type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _movementSpeed: 5
         _moveDirection: {x: 1, y: 0, z: 0}
         _maxMoveDistance: 10
-    - rid: 5280083750616825946
-      type: {class: JumpEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+    - rid: 6617142719275335746
+      type: {class: AutoJumpEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
+        _groundLayer:
+          serializedVersion: 2
+          m_Bits: 8
+        _checkDistance: 2
+        _maxJumpHeight: 1.5
+        _maxSafeFallDepth: 2
         _jumpForce: 10
-    - rid: 5280083750616825947
-      type: {class: DelayEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
-      data:
-        _delayTime: 1
+        _forwardJumpImpulse: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Movement/Rotate")]
     public class RotationEnemyAction : EnemyAction
     {
         [Header("Settings")]
@@ -10,8 +11,9 @@ namespace Game.Enemy.Action
         [SerializeField] private float _duration = 1.0f;
 
         [System.NonSerialized] private float _elapsedTime;
+        [System.NonSerialized] private Quaternion _targetAngle;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
@@ -24,23 +26,25 @@ namespace Game.Enemy.Action
                 return;
             }
 
-            owner.AngularVelocity = _angleDelta / _duration;
+            owner.TargetAngularVelocity = (_angleDelta * Mathf.Deg2Rad) / _duration;
+            _targetAngle = owner.transform.rotation * Quaternion.Euler(_angleDelta);
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
             _elapsedTime += dt;
 
             if (_elapsedTime >= _duration)
             {
-                owner.AngularVelocity = Vector3.zero;
+                owner.TargetAngularVelocity = Vector3.zero;
                 Status = ActionStatus.Success;
             }
         }
 
-        public override void Exit(EnemyActionController owner)
+        public override void Exit(BaseEnemyActionController owner)
         {
-            owner.AngularVelocity = Vector3.zero;
+            owner.TargetAngularVelocity = Vector3.zero;
+            owner.transform.rotation = _targetAngle;
         }
     }
 }

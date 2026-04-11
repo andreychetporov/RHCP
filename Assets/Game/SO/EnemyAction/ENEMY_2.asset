@@ -17,6 +17,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 5280083750616825949
       type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
@@ -24,6 +26,7 @@ MonoBehaviour:
         - rid: 5280083750616825951
         - rid: 5280083750616825952
         - rid: 5280083750616825953
+        - rid: -2
     - rid: 5280083750616825951
       type: {class: SetGravityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
@@ -116,5 +119,3 @@ MonoBehaviour:
         _xMultiplier: 10
         _yMultiplier: 5
         _moveSpeed: 1
-        _lookAtVelocity: 1
-        _rotationSpeed: 360

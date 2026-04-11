@@ -3,6 +3,7 @@
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Movement/Rotate")]
     public class LookAtVelocityEnemyAction : EnemyAction
     {
         [Header("Settings")]
@@ -14,46 +15,46 @@ namespace Game.Enemy.Action
 
         [System.NonSerialized] private float _currentTime = 0.0f;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
             _currentTime = 0.0f;
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
-            Vector3 horizontalVel = new Vector3(owner.Velocity.x, 0.0f, owner.Velocity.z);
+            Vector3 horizontalVel = new Vector3(owner.TargetVelocity.x, 0.0f, owner.TargetVelocity.z);
             
-            if (horizontalVel.sqrMagnitude < _stopThreshold && Mathf.Abs(owner.Velocity.y) < 2.5f)
+            if (horizontalVel.sqrMagnitude < _stopThreshold && Mathf.Abs(owner.TargetVelocity.y) < 2.5f)
             {
                 _currentTime += dt;
                 if (_currentTime >= _waitTime)
                 {
                     Status = ActionStatus.Success;
-                    owner.AngularVelocity = Vector3.zero;
+                    owner.TargetAngularVelocity = Vector3.zero;
                 }
-                owner.AngularVelocity *= Mathf.Exp(-_damping * dt);
+                owner.TargetAngularVelocity *= Mathf.Exp(-_damping * dt);
                 return;
             }
 
             _currentTime = 0.0f;
 
-            Quaternion targetRot = Quaternion.LookRotation(owner.Velocity.normalized, Vector3.up) * Quaternion.Euler(0, -90.0f, 0);
+            Quaternion targetRot = Quaternion.LookRotation(owner.TargetVelocity.normalized, Vector3.up) * Quaternion.Euler(0, -90.0f, 0);
 
             Quaternion delta = targetRot * Quaternion.Inverse(owner.transform.rotation);
             delta.ToAngleAxis(out float angle, out Vector3 axis);
 
             if (Mathf.Abs(angle) < 1.0f)
             {
-                owner.AngularVelocity *= Mathf.Exp(-_damping * dt);
+                owner.TargetAngularVelocity *= Mathf.Exp(-_damping * dt);
                 return;
             }
 
             Vector3 desiredAngVel = axis * angle * Mathf.Deg2Rad * _turnSpeed;
             float t = 1.0f - Mathf.Exp(-_damping * dt);
 
-            owner.AngularVelocity = Vector3.Lerp(owner.AngularVelocity, desiredAngVel, t);
-            owner.AngularVelocity = Vector3.ClampMagnitude(owner.AngularVelocity, _maxAngularVel);
+            owner.TargetAngularVelocity = Vector3.Lerp(owner.TargetAngularVelocity, desiredAngVel, t);
+            owner.TargetAngularVelocity = Vector3.ClampMagnitude(owner.TargetAngularVelocity, _maxAngularVel);
         }
     }
 }

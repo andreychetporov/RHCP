@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Movement/Move")]
     public class CurveMoveEnemyAction : EnemyAction
     {
         [Header("Curves")]
@@ -21,7 +22,7 @@ namespace Game.Enemy.Action
         [System.NonSerialized] private float _xTimeLength;
         [System.NonSerialized] private float _yTimeLength;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
@@ -31,10 +32,10 @@ namespace Game.Enemy.Action
             _xTimeLength = _xCurve == null || _xCurve.length == 0 ? 0.0f : _xCurve.keys.Select(k => k.time).Max();
             _yTimeLength = _yCurve == null || _yCurve.length == 0 ? 0.0f : _yCurve.keys.Select(k => k.time).Max();
 
-            owner.Velocity = Vector3.zero;
+            owner.TargetVelocity = Vector3.zero;
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
             if (dt <= 0.0001f) { return; }
 
@@ -49,19 +50,19 @@ namespace Game.Enemy.Action
             Vector3 targetPos = _startPos + new Vector3(x, y, 0);
 
             Vector3 deltaMove = targetPos - owner.transform.position;
-            owner.Velocity = deltaMove / dt;
+            owner.TargetVelocity = deltaMove / dt;
 
             if (tX >= 1.0f && tY >= 1.0f)
             {
                 Status = ActionStatus.Success;
 
-                owner.Velocity = Vector3.zero;
+                owner.TargetVelocity = Vector3.zero;
             }
         }
 
-        public override void Exit(EnemyActionController owner)
+        public override void Exit(BaseEnemyActionController owner)
         {
-            owner.Velocity = Vector3.zero;
+            owner.TargetVelocity = Vector3.zero;
         }
     }
 }

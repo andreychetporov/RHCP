@@ -8,6 +8,8 @@ namespace Game.Editor
     [CustomPropertyDrawer(typeof(Enemy.Action.EnemyAction), true)]
     public class EnemyActionDrawer : PropertyDrawer
     {
+        private static ITypeGroupingStrategy _grouping = new AttributeGroupingStrategy();
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.managedReferenceValue == null || string.IsNullOrEmpty(property.managedReferenceFullTypename))
@@ -28,7 +30,7 @@ namespace Game.Editor
             Rect buttonRect = new Rect(position.x, position.y + EditorGUIUtility.singleLineHeight + 2, position.width, EditorGUIUtility.singleLineHeight);
             if (GUI.Button(buttonRect, "Select Action Type (None)"))
             {
-                SerializeReferenceDrawerHelper.ShowTypeSelectionMenu(property, typeof(Enemy.Action.EnemyAction));
+                SerializeReferenceDrawerHelper.ShowTypeSelectionMenu(property, typeof(Enemy.Action.EnemyAction), null, _grouping);
             }
         }
 
@@ -40,7 +42,7 @@ namespace Game.Editor
             Rect btnRect = new Rect(position.x + position.width - 90, position.y, 90, EditorGUIUtility.singleLineHeight);
             if (GUI.Button(btnRect, "Change Type", EditorStyles.miniButton))
             {
-                SerializeReferenceDrawerHelper.ShowTypeSelectionMenu(property, typeof(Enemy.Action.EnemyAction));
+                SerializeReferenceDrawerHelper.ShowTypeSelectionMenu(property, typeof(Enemy.Action.EnemyAction), null, _grouping);
             }
 
             if (property.isExpanded)
@@ -88,7 +90,6 @@ namespace Game.Editor
 
             return height;
         }
-
     }
 }
 

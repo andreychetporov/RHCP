@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Movement/Move")]
     public class MoveEnemyAction : EnemyAction
     {
         [Header("Move Settings")]
@@ -14,7 +15,7 @@ namespace Game.Enemy.Action
         [System.NonSerialized] private Vector3 _startPosition;
         [System.NonSerialized] private Vector3 _worldDirection;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
@@ -22,19 +23,19 @@ namespace Game.Enemy.Action
             _worldDirection = owner.transform.TransformDirection(_moveDirection.normalized);
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
             float traveled = Vector2.Distance(new Vector2(_startPosition.x, _startPosition.z), new Vector2(owner.transform.position.x, owner.transform.position.z));
 
             if (_maxMoveDistance > 0f && traveled >= _maxMoveDistance)
             {
-                owner.Velocity = new Vector3(0, owner.Velocity.y, 0);
+                owner.TargetVelocity = new Vector3(0, owner.TargetVelocity.y, 0);
                 Status = ActionStatus.Success;
                 return;
             }
 
             Vector3 horizontal = _worldDirection * _movementSpeed;
-            owner.Velocity = new Vector3(horizontal.x, owner.Velocity.y, horizontal.z);
+            owner.TargetVelocity = new Vector3(horizontal.x, owner.TargetVelocity.y, horizontal.z);
         }
     }
 }

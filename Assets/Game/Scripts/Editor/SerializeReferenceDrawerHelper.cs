@@ -153,7 +153,7 @@ namespace Game.Editor
             }
         }
 
-        public static void ShowTypeSelectionMenu(SerializedProperty property, Type baseType, Type requiredInterface = null)
+        public static void ShowTypeSelectionMenu(SerializedProperty property, Type baseType, Type requiredInterface = null, ITypeGroupingStrategy grouping = null)
         {
             var menu = new GenericMenu();
             var types = FindAllDerivedTypes(baseType, requiredInterface);
@@ -165,27 +165,54 @@ namespace Game.Editor
             });
             menu.AddSeparator("");
 
-            foreach (var type in types)
+            if (grouping != null)
             {
-                string name = ObjectNames.NicifyVariableName(type.Name);
-                menu.AddItem(new GUIContent(name), false, () =>
+                var grouped = types.GroupBy(t => grouping.GetCategory(t)).OrderBy(g => g.Key);
+
+                foreach (var group in grouped)
                 {
-                    try
+                    foreach (var type in group.OrderBy(t => t.Name))
                     {
-                        property.managedReferenceValue = Activator.CreateInstance(type);
-                        property.serializedObject.ApplyModifiedProperties();
+                        string path = $"{group.Key}/{ObjectNames.NicifyVariableName(type.Name)}";
+
+                        menu.AddItem(new GUIContent(path), false, () =>
+                        {
+                            CreateInstance(property, type);
+                        });
                     }
-                    catch (Exception e)
+
+                    menu.AddSeparator("");
+                }
+            }
+            else
+            {
+                foreach (var type in types.OrderBy(t => t.Name))
+                {
+                    string name = ObjectNames.NicifyVariableName(type.Name);
+
+                    menu.AddItem(new GUIContent(name), false, () =>
                     {
-                        Debug.LogError($"Failed to create {type}: {e}");
-                    }
-                });
+                        CreateInstance(property, type);
+                    });
+                }
             }
 
-            if (types.Count == 0)
-                menu.AddDisabledItem(new GUIContent("No types found"));
+            if (types.Count == 0) { menu.AddDisabledItem(new GUIContent("No types found")); }
 
             menu.ShowAsContext();
+        }
+
+        private static void CreateInstance(SerializedProperty property, Type type)
+        {
+            try
+            {
+                property.managedReferenceValue = Activator.CreateInstance(type);
+                property.serializedObject.ApplyModifiedProperties();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to create {type}: {e}");
+            }
         }
 
         private static List<Type> FindAllDerivedTypes(Type baseType, Type requiredInterface = null)

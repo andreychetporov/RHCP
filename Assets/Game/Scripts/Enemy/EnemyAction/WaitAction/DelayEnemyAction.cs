@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Wait")]
     public class DelayEnemyAction : EnemyAction
     {
         [Header("Settings")]
@@ -10,14 +11,14 @@ namespace Game.Enemy.Action
 
         private float _currnetTime = 0.0f;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
             _currnetTime = 0.0f;
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
             _currnetTime += dt;
 

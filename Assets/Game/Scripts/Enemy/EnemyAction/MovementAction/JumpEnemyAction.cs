@@ -3,21 +3,22 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Movement/Jump")]
     public class JumpEnemyAction : EnemyAction
     {
         [Header("Jump Settings")]
         [SerializeField] private float _jumpForce = 10.0f;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
-            owner.Velocity = new Vector3(owner.Velocity.x, _jumpForce, owner.Velocity.z);
+            owner.TargetVelocity = new Vector3(owner.TargetVelocity.x, _jumpForce, owner.TargetVelocity.z);
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
-            if (owner.Velocity.y <= 0f && owner.IsGrounded)
+            if (owner.TargetVelocity.y <= 0f && owner.IsGrounded)
             {
                 Status = ActionStatus.Success;
             }

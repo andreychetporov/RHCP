@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Composites")]
     public class RepeatEnemyAction : EnemyAction
     {
         [Header("Settigs")]
@@ -14,7 +15,7 @@ namespace Game.Enemy.Action
 
         [System.NonSerialized] private int _currentCount = 0;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
@@ -23,11 +24,11 @@ namespace Game.Enemy.Action
             Child.Enter(owner);
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
             Child.Process(owner, dt);
 
-            if (Child.Status == ActionStatus.Success)
+            if (Child.Status != ActionStatus.Running)
             {
                 Child.Exit(owner);
                 _currentCount++;
@@ -41,6 +42,11 @@ namespace Game.Enemy.Action
                     Child.Enter(owner);
                 }
             }
+        }
+
+        public override void Exit(BaseEnemyActionController owner)
+        {
+            Child.Exit(owner);
         }
     }
 }

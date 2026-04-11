@@ -4,28 +4,35 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("Composites")]
     public class ParallelEnemyAction : EnemyAction
     {
         [SerializeReference] public List<EnemyAction> Children;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
             foreach (EnemyAction action in Children) { action.Enter(owner); }
         }
 
-        public override void Process(EnemyActionController owner, float dt)
+        public override void Process(BaseEnemyActionController owner, float dt)
         {
             bool allDone = true;
 
-            foreach (EnemyAction action in Children)
+            foreach (var action in Children)
             {
                 if (action.Status == ActionStatus.Running)
                 {
                     action.Process(owner, dt);
-                    allDone = false;
+
+                    if (action.Status != ActionStatus.Running)
+                    {
+                        action.Exit(owner);
+                    }
                 }
+
+                if (action.Status == ActionStatus.Running) { allDone = false; }
             }
 
             if (allDone) { Status = ActionStatus.Success; }

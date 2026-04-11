@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Game.Enemy.Action
 {
     [System.Serializable]
+    [EnemyActionCategory("PropertySetters")]
     public class SetCollisionLayerEnemyAction :EnemyAction
     {
         [Header("Settings")]
@@ -10,13 +11,11 @@ namespace Game.Enemy.Action
         [SerializeField] private LayerMask _includeLayers = -1;
         [SerializeField] private LayerMask _excludeLayers = -1;
 
-        public override void Enter(EnemyActionController owner)
+        public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
-            owner.Controller.detectCollisions = _detectCollisions;
-            owner.Controller.includeLayers = _includeLayers;
-            owner.Controller.excludeLayers = _excludeLayers;
+            owner.SetCollisionData(_detectCollisions, _includeLayers, _excludeLayers);
 
             Status = ActionStatus.Success;
         }

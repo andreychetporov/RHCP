@@ -7,13 +7,13 @@ namespace Game.Enemy.Action
 
         public ActionStatus Status { get; set; }
 
-        public virtual void Enter(EnemyActionController owner)
+        public virtual void Enter(BaseEnemyActionController owner)
         {
             Status = ActionStatus.Running;
         }
 
-        public virtual void Process(EnemyActionController owner, float dt) { }
+        public virtual void Process(BaseEnemyActionController owner, float dt) { }
         
-        public virtual void Exit(EnemyActionController owner) { }
+        public virtual void Exit(BaseEnemyActionController owner) { }
     }
 }
