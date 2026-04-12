@@ -14,13 +14,21 @@ namespace Game.Enemy.Action
 
         [System.NonSerialized] private Vector3 _startPosition;
         [System.NonSerialized] private Vector3 _worldDirection;
+        [System.NonSerialized] private Vector3? _endPosition;
 
         public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
+            _endPosition = null;
+
             _startPosition = owner.transform.position;
             _worldDirection = owner.transform.TransformDirection(_moveDirection.normalized);
+
+            if (_maxMoveDistance < 0.0f)
+            {
+                _endPosition = _startPosition + _worldDirection * _movementSpeed;
+            }
         }
 
         public override void Process(BaseEnemyActionController owner, float dt)
@@ -36,6 +44,14 @@ namespace Game.Enemy.Action
 
             Vector3 horizontal = _worldDirection * _movementSpeed;
             owner.TargetVelocity = new Vector3(horizontal.x, owner.TargetVelocity.y, horizontal.z);
+        }
+
+        public override void Exit(BaseEnemyActionController owner)
+        {
+            if (_endPosition.HasValue)
+            {
+                owner.transform.position = _endPosition.Value;
+            }
         }
     }
 }

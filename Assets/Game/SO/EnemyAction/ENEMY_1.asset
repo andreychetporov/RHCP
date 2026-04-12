@@ -34,11 +34,11 @@ MonoBehaviour:
       type: {class: RotationEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _angleDelta: {x: 0, y: 180, z: 0}
-        _duration: 1
+        _duration: 0.1
     - rid: 5280083750616825947
       type: {class: DelayEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _delayTime: 1
+        _delayTime: 0
     - rid: 6617142719275335744
       type: {class: DoSecondWhileMainRunningEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
@@ -49,7 +49,7 @@ MonoBehaviour:
     - rid: 6617142719275335745
       type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _movementSpeed: 5
+        _movementSpeed: 50
         _moveDirection: {x: 1, y: 0, z: 0}
         _maxMoveDistance: 10
     - rid: 6617142719275335746
@@ -61,5 +61,5 @@ MonoBehaviour:
         _checkDistance: 2
         _maxJumpHeight: 1.5
         _maxSafeFallDepth: 2
-        _jumpForce: 10
+        _jumpForce: 12
         _forwardJumpImpulse: 0

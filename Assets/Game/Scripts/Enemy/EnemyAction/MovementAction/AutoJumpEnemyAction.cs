@@ -29,7 +29,7 @@ namespace Game.Enemy.Action
         {
             if (_isJump)
             {
-                if (owner.IsGrounded)
+                if (!owner.IsJumping && owner.IsGrounded)
                 {
                     Status = ActionStatus.Success;
                 }
@@ -53,8 +53,6 @@ namespace Game.Enemy.Action
             }
 
             Vector3 edgeCheckPos = origin + forward * _checkDistance;
-
-            Debug.DrawLine(edgeCheckPos, edgeCheckPos + Vector3.down * _maxSafeFallDepth, Color.red);
 
             if (!Physics.Raycast(edgeCheckPos, Vector3.down, out RaycastHit groundHit, _maxSafeFallDepth, _groundLayer))
             {

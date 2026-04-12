@@ -14,11 +14,13 @@ namespace Game.Enemy.Action
             base.Enter(owner);
 
             owner.TargetVelocity = new Vector3(owner.TargetVelocity.x, _jumpForce, owner.TargetVelocity.z);
+
+            owner.SetTriggerJump();
         }
 
         public override void Process(BaseEnemyActionController owner, float dt)
         {
-            if (owner.TargetVelocity.y <= 0f && owner.IsGrounded)
+            if (!owner.IsJumping && owner.IsGrounded )
             {
                 Status = ActionStatus.Success;
             }

@@ -187,8 +187,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""32cb4ef4-cb1c-4fc5-922e-fcb64098e55e"",
-                    ""path"": ""<Keyboard>/ctrl"",
+                    ""id"": ""a4026674-3b53-4895-9e3d-84ad37d4d82b"",
+                    ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
