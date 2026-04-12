@@ -359,13 +359,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233662917}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 6, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 963685877}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!23 &233662919
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -529,7 +529,7 @@ Transform:
   m_GameObject: {fileID: 575096703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: -16.75, z: 0}
   m_LocalScale: {x: 7.26, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -572,9 +572,10 @@ MonoBehaviour:
   TargetVelocity: {x: 0, y: 0, z: 0}
   TargetAngularVelocity: {x: 0, y: 0, z: 0}
   Gravity: -20
-  _testSO: {fileID: 11400000, guid: 2b4dae97df544854f8ba6ba8f7cef773, type: 2}
+  _testSO: {fileID: 11400000, guid: b7d36df3bde33c14fbe79a4ea786ebbe, type: 2}
   _model: {fileID: 233662918}
   _groundProbe: {fileID: 963685873}
+  SquashEnabled: 0
   squashOnJump: 0.05
   squashOnLandMin: 0.05
   squashOnLandMax: 0.17
@@ -582,10 +583,12 @@ MonoBehaviour:
   landSpeedMax: 25
   springStiffness: 121.9
   springDamping: 10.44
+  SuspensionEnabled: 0
   rideHeight: 1
   springStrength: 120
   springDamper: 25
   maxSpringForce: 200
+  _groundDistance: 1
 --- !u!143 &963685872
 CharacterController:
   m_ObjectHideFlags: 0
@@ -872,7 +875,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1275798550
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -939,9 +942,9 @@ Transform:
   m_GameObject: {fileID: 1275798548}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.62, z: -4.38}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 5.62, z: -4.38}
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2076166483}
   - {fileID: 1835823100}
@@ -954,7 +957,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1275798548}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9f485e44b009ed4dafa6bfab70fa374, type: 3}
   m_Name: 
@@ -962,7 +965,7 @@ MonoBehaviour:
   TargetVelocity: {x: 0, y: 0, z: 0}
   TargetAngularVelocity: {x: 0, y: 0, z: 0}
   Gravity: -20
-  _testSO: {fileID: 11400000, guid: 2b4dae97df544854f8ba6ba8f7cef773, type: 2}
+  _testSO: {fileID: 11400000, guid: b7d36df3bde33c14fbe79a4ea786ebbe, type: 2}
 --- !u!143 &1275798559
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1024,6 +1027,7 @@ MonoBehaviour:
   _testSO: {fileID: 11400000, guid: 2b4dae97df544854f8ba6ba8f7cef773, type: 2}
   _model: {fileID: 0}
   _groundProbe: {fileID: 0}
+  SquashEnabled: 1
   squashOnJump: 0.2
   squashOnLandMin: 0.1
   squashOnLandMax: 0.5
@@ -1031,10 +1035,12 @@ MonoBehaviour:
   landSpeedMax: 15
   springStiffness: 280
   springDamping: 18
+  SuspensionEnabled: 1
   rideHeight: 1
   springStrength: 120
   springDamper: 25
   maxSpringForce: 200
+  _groundDistance: 1
 --- !u!1 &1372999981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,8 +1427,8 @@ Transform:
   m_GameObject: {fileID: 2145477239}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 4}
+  m_LocalPosition: {x: 0, y: 4.5, z: 0}
+  m_LocalScale: {x: 116.24, y: 1, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

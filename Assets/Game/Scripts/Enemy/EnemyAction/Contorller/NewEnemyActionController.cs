@@ -14,6 +14,7 @@ namespace Game.Enemy
         [SerializeField] private GroundProbe _groundProbe;
 
         [Header("Squash")]
+        [SerializeField] private bool SquashEnabled = true;
         [SerializeField] private float squashOnJump = 0.2f;
         [SerializeField] private float squashOnLandMin = 0.1f;
         [SerializeField] private float squashOnLandMax = 0.5f;
@@ -97,6 +98,8 @@ namespace Game.Enemy
 
         private void SquashUpdate()
         {
+            if (!SquashEnabled) { return; }
+            
             bool grounded = IsGrounded;
 
             if (grounded && !_wasGrounded)

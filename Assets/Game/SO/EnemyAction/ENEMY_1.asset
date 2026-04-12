@@ -13,53 +13,101 @@ MonoBehaviour:
   m_Name: ENEMY_1
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Action.EnemyActionBehaviorSO
   RootAction:
-    rid: 5280083750616825937
+    rid: 6617142742666707024
   references:
     version: 2
     RefIds:
-    - rid: 5280083750616825937
-      type: {class: RepeatEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
-      data:
-        _count: -1
-        Child:
-          rid: 5280083750616825939
-    - rid: 5280083750616825939
-      type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
-      data:
-        Children:
-        - rid: 6617142719275335744
-        - rid: 5280083750616825947
-        - rid: 5280083750616825941
-    - rid: 5280083750616825941
-      type: {class: RotationEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
-      data:
-        _angleDelta: {x: 0, y: 180, z: 0}
-        _duration: 0.1
-    - rid: 5280083750616825947
-      type: {class: DelayEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
-      data:
-        _delayTime: 0
-    - rid: 6617142719275335744
+    - rid: 6617142742666707024
       type: {class: DoSecondWhileMainRunningEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _mainAction:
-          rid: 6617142719275335745
+          rid: 6617142742666707025
         _secondAction:
-          rid: 6617142719275335746
-    - rid: 6617142719275335745
-      type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+          rid: 6617142742666707026
+    - rid: 6617142742666707025
+      type: {class: CurveMoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _movementSpeed: 50
-        _moveDirection: {x: 1, y: 0, z: 0}
-        _maxMoveDistance: 10
-    - rid: 6617142719275335746
-      type: {class: AutoJumpEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
-      data:
-        _groundLayer:
+        _xCurve:
           serializedVersion: 2
-          m_Bits: 8
-        _checkDistance: 2
-        _maxJumpHeight: 1.5
-        _maxSafeFallDepth: 2
-        _jumpForce: 12
-        _forwardJumpImpulse: 0
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: -0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 2
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _yCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.5
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1.5
+            value: -1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 2
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 136
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _xMultiplier: 10
+        _yMultiplier: 5
+        _moveSpeed: 5
+    - rid: 6617142742666707026
+      type: {class: LookAtVelocityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _turnSpeed: 8
+        _maxAngularVel: 15
+        _damping: 6

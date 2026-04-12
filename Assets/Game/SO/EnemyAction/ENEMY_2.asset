@@ -13,41 +13,45 @@ MonoBehaviour:
   m_Name: ENEMY_2
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Action.EnemyActionBehaviorSO
   RootAction:
-    rid: 5280083750616825949
+    rid: 6617142742666707027
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 5280083750616825949
+    - rid: 6617142742666707027
       type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         Children:
-        - rid: 5280083750616825951
-        - rid: 5280083750616825952
-        - rid: 5280083750616825953
-        - rid: -2
-    - rid: 5280083750616825951
+        - rid: 6617142742666707028
+        - rid: 6617142742666707031
+        - rid: 6617142742666707029
+    - rid: 6617142742666707028
       type: {class: SetGravityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _gravityValue: 0
-    - rid: 5280083750616825952
+    - rid: 6617142742666707029
+      type: {class: DoSecondWhileMainRunningEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _mainAction:
+          rid: 6617142742666707033
+        _secondAction:
+          rid: 6617142742666707036
+    - rid: 6617142742666707031
       type: {class: SetCollisionLayerEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _detectCollisions: 1
+        _detectCollisions: 0
         _includeLayers:
           serializedVersion: 2
           m_Bits: 0
         _excludeLayers:
           serializedVersion: 2
           m_Bits: 8
-    - rid: 5280083750616825953
+    - rid: 6617142742666707033
       type: {class: RepeatEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _count: -1
         Child:
-          rid: 5280083750616825958
-    - rid: 5280083750616825958
+          rid: 6617142742666707034
+    - rid: 6617142742666707034
       type: {class: CurveMoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _xCurve:
@@ -60,17 +64,17 @@ MonoBehaviour:
             outSlope: 1
             tangentMode: 34
             weightedMode: 0
-            inWeight: 0
+            inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 4.5
-            value: 4.5
+            time: 2
+            value: 2
             inSlope: 1
             outSlope: 1
             tangentMode: 34
             weightedMode: 0
             inWeight: 0.33333334
-            outWeight: 0
+            outWeight: 0.33333334
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
@@ -80,42 +84,48 @@ MonoBehaviour:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 0.6666667
-            outSlope: 0.6666667
+            inSlope: 2
+            outSlope: 2
             tangentMode: 34
             weightedMode: 0
-            inWeight: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.5
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
             time: 1.5
-            value: 1
-            inSlope: -0.33846542
-            outSlope: -0.33846542
+            value: -1
+            inSlope: 0
+            outSlope: 0
             tangentMode: 34
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
           - serializedVersion: 3
-            time: 3
-            value: -1.0153964
-            inSlope: -0.33846542
-            outSlope: -0.33846542
+            time: 2
+            value: 0
+            inSlope: 2
+            outSlope: 2
             tangentMode: 34
             weightedMode: 0
             inWeight: 0.33333334
             outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 4.5
-            value: -0.015396357
-            inSlope: 0.6666667
-            outSlope: 0.6666667
-            tangentMode: 34
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        _xMultiplier: 10
-        _yMultiplier: 5
-        _moveSpeed: 1
+        _xMultiplier: 30
+        _yMultiplier: 10
+        _moveSpeed: 0.75
+    - rid: 6617142742666707036
+      type: {class: LookAtVelocityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _turnSpeed: 8
+        _maxAngularVel: 15
+        _damping: 6
