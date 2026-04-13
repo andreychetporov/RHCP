@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-
+using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HoverSuspension hoverSuspension;
     [SerializeField] private PlayerMovementMotor movementMotor;
     [SerializeField] private JumpMotor jumpMotor;
+    [SerializeField] private CursorSlice slice;
 
     private IPlayerInput _input;
 
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour
 
         if (jumpMotor == null)
             jumpMotor = GetComponent<JumpMotor>();
+
+        if (slice == null)
+            slice = GetComponent<CursorSlice>();    
     }
 
     private void FixedUpdate()
@@ -39,7 +43,6 @@ public class PlayerController : MonoBehaviour
         bool jumpHeld = _input.JumpHeld;
         bool dashPressed = _input.DashPressed;
         bool crouchHeld = _input.CrouchHeld;
-
         if (jumpPressed)
             _input.ConsumeJumpPressed();
 
@@ -55,7 +58,16 @@ public class PlayerController : MonoBehaviour
         if (dashPressed)
             movementMotor.TryDash(moveX, crouchHeld);
 
+
         jumpMotor.TickJump(jumpPressed, jumpReleased, jumpHeld, dt);
         movementMotor.TickMove(moveX, crouchHeld, dt);
+    }
+
+    private void Update()
+    {
+        slice.SetEmitting(_input.MouseHeld);
+        if (_input.MouseHeld)
+            slice.TickSlice();
+        
     }
 }
