@@ -8,8 +8,7 @@ public interface IPlayerInput
     bool JumpHeld { get; }
     bool CrouchHeld { get; }
     bool DashPressed { get; }
-    bool MouseHeld { get; }
-
+    bool MousePressed { get; }
     void ConsumeJumpPressed();
     void ConsumeJumpReleased();
 

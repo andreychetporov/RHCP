@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerMovementMotor movementMotor;
     [SerializeField] private JumpMotor jumpMotor;
     [SerializeField] private CursorSlice slice;
+    private bool isSlicing = false;
 
     private IPlayerInput _input;
 
@@ -65,9 +66,22 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        slice.SetEmitting(_input.MouseHeld);
-        if (_input.MouseHeld)
-            slice.TickSlice();
-        
+        if (_input.MousePressed && !isSlicing)
+        {
+            slice.Reset();
+            slice.SetEmitting(true);
+            isSlicing = true;
+        }
+
+        if(isSlicing)
+            slice.UpdateSlice();
+
+        if (!_input.MousePressed && isSlicing)
+        {
+            slice.SetEmitting(false);
+            isSlicing = false;
+        }
+
+
     }
 }
