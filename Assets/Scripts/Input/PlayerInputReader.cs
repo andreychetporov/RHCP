@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using System.Numerics;
 using UnityEngine.InputSystem;
 
 public class PlayerInputReader : IPlayerInput
@@ -9,13 +11,13 @@ public class PlayerInputReader : IPlayerInput
     private bool _dashPressed;
 
     public float MoveX => _actions.Player.Move.ReadValue<float>();
-
     public bool JumpHeld => _actions.Player.Jump.IsPressed();
     public bool CrouchHeld => _actions.Player.Crouch.IsPressed();
 
     public bool JumpPressed => _jumpPressed;
     public bool JumpReleased => _jumpReleased;
     public bool DashPressed => _dashPressed;
+    public bool MouseHeld => _actions.Player.Mouse.IsPressed();
 
     public void ConsumeJumpPressed() => _jumpPressed = false;
     public void ConsumeJumpReleased() => _jumpReleased = false;
@@ -27,7 +29,6 @@ public class PlayerInputReader : IPlayerInput
 
         _actions.Player.Jump.performed += ctx => _jumpPressed = true;
         _actions.Player.Jump.canceled += ctx => _jumpReleased = true;
-
         _actions.Player.Dash.performed += ctx => _dashPressed = true;
 
         _actions.Enable();

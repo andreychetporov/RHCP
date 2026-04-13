@@ -41,6 +41,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse",
+                    "type": "Button",
+                    "id": "79f1e9c8-5879-4df8-a0f6-65768a733b70",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -101,12 +110,23 @@
                 },
                 {
                     "name": "",
-                    "id": "32cb4ef4-cb1c-4fc5-922e-fcb64098e55e",
-                    "path": "<Keyboard>/ctrl",
+                    "id": "a4026674-3b53-4895-9e3d-84ad37d4d82b",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9c61a0bd-a89c-4f0c-b175-66855eb4b748",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold,Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

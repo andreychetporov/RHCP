@@ -32,6 +32,11 @@ public class GroundProbe : MonoBehaviour
             Hit = hit;
     }
 
+    private void OnDestroy()
+    {
+        Debug.Log("Destroy");
+    }
+
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {

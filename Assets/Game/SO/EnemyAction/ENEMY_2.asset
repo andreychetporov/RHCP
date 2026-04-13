@@ -1,0 +1,131 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccbb5540b44234148b5ca7b1eec67bc1, type: 3}
+  m_Name: ENEMY_2
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Action.EnemyActionBehaviorSO
+  RootAction:
+    rid: 6617142742666707027
+  references:
+    version: 2
+    RefIds:
+    - rid: 6617142742666707027
+      type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        Children:
+        - rid: 6617142742666707028
+        - rid: 6617142742666707031
+        - rid: 6617142742666707029
+    - rid: 6617142742666707028
+      type: {class: SetGravityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _gravityValue: 0
+    - rid: 6617142742666707029
+      type: {class: DoSecondWhileMainRunningEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _mainAction:
+          rid: 6617142742666707033
+        _secondAction:
+          rid: 6617142742666707036
+    - rid: 6617142742666707031
+      type: {class: SetCollisionLayerEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _detectCollisions: 0
+        _includeLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        _excludeLayers:
+          serializedVersion: 2
+          m_Bits: 8
+    - rid: 6617142742666707033
+      type: {class: RepeatEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _count: -1
+        Child:
+          rid: 6617142742666707034
+    - rid: 6617142742666707034
+      type: {class: CurveMoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _xCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 2
+            value: 2
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _yCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 0.5
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1.5
+            value: -1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 2
+            value: 0
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _xMultiplier: 30
+        _yMultiplier: 10
+        _moveSpeed: 0.75
+    - rid: 6617142742666707036
+      type: {class: LookAtVelocityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _turnSpeed: 8
+        _maxAngularVel: 15
+        _damping: 6
