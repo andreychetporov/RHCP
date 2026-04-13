@@ -1,0 +1,34 @@
+using UnityEngine;
+
+[RequireComponent(typeof(Collider))]
+public class FinishZone : MonoBehaviour
+{
+    [SerializeField] private RunLevelController _runLevelController;
+    [SerializeField] private string _playerTag = "Player";
+    [SerializeField] private bool _requireStartedRun = true;
+
+    private Collider _collider;
+
+    private void Awake()
+    {
+        _collider = GetComponent<Collider>();
+        _collider.isTrigger = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag(_playerTag))
+            return;
+
+        if (_runLevelController == null)
+        {
+            Debug.LogWarning("FinishZone: не назначен RunLevelController");
+            return;
+        }
+
+        if (_requireStartedRun && !_runLevelController.IsRunStarted)
+            return;
+
+        _runLevelController.FinishRun();
+    }
+}
