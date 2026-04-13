@@ -13,17 +13,31 @@ MonoBehaviour:
   m_Name: EnemyActionBeheviorSO
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Action.EnemyActionBehaviorSO
   RootAction:
-    rid: 615779572828864886
+    rid: 615779596844662785
   references:
     version: 2
     RefIds:
-    - rid: 615779572828864886
+    - rid: 615779596844662785
       type: {class: RepeatEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _count: -1
         Child:
-          rid: 615779572828864887
-    - rid: 615779572828864887
-      type: {class: JumpEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+          rid: 615779596844662786
+    - rid: 615779596844662786
+      type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _jumpForce: 14.92
+        Children:
+        - rid: 615779596844662787
+        - rid: 615779596844662789
+    - rid: 615779596844662787
+      type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _movementSpeed: 5
+        _moveDirection: {x: 1, y: 0, z: 0}
+        _maxMoveDistance: 15
+    - rid: 615779596844662789
+      type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _movementSpeed: 5
+        _moveDirection: {x: -1, y: 0, z: 0}
+        _maxMoveDistance: 15

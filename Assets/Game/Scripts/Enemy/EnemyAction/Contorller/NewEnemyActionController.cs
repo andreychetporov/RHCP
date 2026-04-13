@@ -10,7 +10,6 @@ namespace Game.Enemy
         [SerializeField] private EnemyActionBehaviorSO _testSO;
 
         [SerializeField] private Transform _model;
-
         [SerializeField] private GroundProbe _groundProbe;
 
         [Header("Squash")]
@@ -32,6 +31,12 @@ namespace Game.Enemy
 
         [SerializeField] private float _groundDistance = 1.0f;
 
+        [Header("Hit Slow")]
+        [SerializeField] private bool _hitSlowEnabled = true;
+        [SerializeField] private float _hitSlowMultiplier = 0.35f;
+        [SerializeField] private float _hitSlowDuration = 0.2f;
+        [SerializeField] private float _hitSlowDownSpeed = 18f;
+        [SerializeField] private float _hitRecoverSpeed = 8f;
 
         private CharacterController _controller;
 
@@ -42,7 +47,12 @@ namespace Game.Enemy
 
         private Vector3 _baseScale;
 
-        public override bool IsGrounded => SuspensionEnabled ? _groundProbe.GroundDistance <= _groundDistance : _groundProbe.IsGrounded;
+        private float _hitSlowTimer;
+        private float _currentMoveSpeedMultiplier = 1f;
+
+        public override bool IsGrounded => SuspensionEnabled
+            ? _groundProbe.GroundDistance <= _groundDistance
+            : _groundProbe.IsGrounded;
 
         private void Awake()
         {
@@ -60,11 +70,6 @@ namespace Game.Enemy
             base.Start();
         }
 
-        private void FixedUpdate()
-        {
-            Debug.Log(IsGrounded);
-        }
-
         private void Update()
         {
             float dt = Time.deltaTime;
@@ -72,21 +77,33 @@ namespace Game.Enemy
 
             GravityHandle(dt);
             BehaviorHandle(dt);
+            UpdateHitSlow(dt);
+
+            Vector3 finalVelocity = GetSlowedVelocity(TargetVelocity);
 
             if (TargetAngularVelocity.sqrMagnitude > 0.0001f)
             {
-                float angleRad = TargetAngularVelocity.magnitude * dt;
+                Vector3 slowedAngularVelocity = TargetAngularVelocity * _currentMoveSpeedMultiplier;
+
+                float angleRad = slowedAngularVelocity.magnitude * dt;
                 float angleDeg = angleRad * Mathf.Rad2Deg;
 
-                transform.rotation =
-                    Quaternion.AngleAxis(angleDeg, TargetAngularVelocity.normalized) * transform.rotation;
+                if (angleDeg > 0.0001f)
+                {
+                    transform.rotation =
+                        Quaternion.AngleAxis(angleDeg, slowedAngularVelocity.normalized) * transform.rotation;
+                }
             }
 
-            _controller.Move(TargetVelocity * dt);
+            _controller.Move(finalVelocity * dt);
+
             SquashUpdate();
             _groundProbe.TickProbe();
 
-            if (SuspensionEnabled) { TickSuspension(dt); }
+            if (SuspensionEnabled)
+            {
+                TickSuspension(dt);
+            }
         }
 
         public override void SetCollisionData(bool detectCollisions, LayerMask includeLayers, LayerMask excludeLayers)
@@ -96,10 +113,44 @@ namespace Game.Enemy
             _controller.excludeLayers = excludeLayers;
         }
 
+        public void ApplyHitSlow()
+        {
+            if (!_hitSlowEnabled)
+                return;
+
+            _hitSlowTimer = _hitSlowDuration;
+        }
+
+        private void UpdateHitSlow(float dt)
+        {
+            float targetMultiplier = 1f;
+            float changeSpeed = _hitRecoverSpeed;
+
+            if (_hitSlowTimer > 0f)
+            {
+                _hitSlowTimer -= dt;
+                targetMultiplier = _hitSlowMultiplier;
+                changeSpeed = _hitSlowDownSpeed;
+            }
+
+            _currentMoveSpeedMultiplier = Mathf.MoveTowards(
+                _currentMoveSpeedMultiplier,
+                targetMultiplier,
+                changeSpeed * dt
+            );
+        }
+
+        private Vector3 GetSlowedVelocity(Vector3 velocity)
+        {
+            Vector3 horizontal = new Vector3(velocity.x, 0f, velocity.z) * _currentMoveSpeedMultiplier;
+            return new Vector3(horizontal.x, velocity.y, horizontal.z);
+        }
+
         private void SquashUpdate()
         {
-            if (!SquashEnabled) { return; }
-            
+            if (!SquashEnabled)
+                return;
+
             bool grounded = IsGrounded;
 
             if (grounded && !_wasGrounded)
@@ -146,11 +197,9 @@ namespace Game.Enemy
             Rigidbody hitBody = _groundProbe.GroundRigidbody;
 
             Vector3 rayDir = Vector3.down;
-
             Vector3 hitBodyVelocity = hitBody != null ? hitBody.linearVelocity : Vector3.zero;
 
             float bodyVelAlongRay = Vector3.Dot(rayDir, TargetVelocity);
-
             float hitVelAlongRay = Vector3.Dot(rayDir, hitBodyVelocity);
             float relativeVel = bodyVelAlongRay - hitVelAlongRay;
 
