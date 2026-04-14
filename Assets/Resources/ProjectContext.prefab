@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8348332600692292992}
   - component: {fileID: 4130852181277900834}
   - component: {fileID: 4178287159433640309}
-  - component: {fileID: 1826445212117212389}
+  - component: {fileID: 3063005677852248072}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -51,7 +51,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 4130852181277900834}
   - {fileID: 4178287159433640309}
-  - {fileID: 1826445212117212389}
+  - {fileID: 3063005677852248072}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc24cd3f0780c354185f207994723c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Zenject.FactoryInstaller
---- !u!114 &1826445212117212389
+--- !u!114 &3063005677852248072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

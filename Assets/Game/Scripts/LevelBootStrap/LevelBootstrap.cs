@@ -4,9 +4,14 @@ namespace Game.Level
 {
     public class LevelBootstrap : MonoBehaviour
     {
+        [Header("Reference")]
+        [SerializeField] private Transform _player;
+
         public static LevelBootstrap Instance { get; private set; }
 
-        public Vector3 GetPlayerPosition => transform.position;
+
+
+        public Vector3 GetPlayerPosition => _player.transform.position;
 
         public void Awake()
         {

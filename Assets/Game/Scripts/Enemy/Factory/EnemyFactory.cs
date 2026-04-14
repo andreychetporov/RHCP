@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -7,13 +8,30 @@ namespace Game.Enemy
     {
         [Inject] private readonly EnemyController _prefab;
 
+        private List<EnemyController> _pool = new List<EnemyController>();
+
         public EnemyController CreateEnemy(EnemySO enemySO, Transform spawnTransform)
         {
-            EnemyController enemy = GameObject.Instantiate(_prefab, spawnTransform.position, spawnTransform.rotation);
+            EnemyController enemy = null;
+            foreach (EnemyController controller in _pool)
+            {
+                if (controller != null && !controller.gameObject.activeSelf)
+                {
+                    enemy = controller;
+                    break;
+                }
+            }
+
+            if (enemy == null) { enemy = GameObject.Instantiate(_prefab, spawnTransform); }
+            else { enemy.transform.parent = spawnTransform; }
             enemy.Initialize(enemySO);
 
-            return enemy;
+            Debug.Log($"Factory {enemy.gameObject}");
 
+            enemy.transform.position = spawnTransform.position;
+            enemy.transform.rotation = spawnTransform.rotation;
+
+            return enemy;
         }
     }
 }

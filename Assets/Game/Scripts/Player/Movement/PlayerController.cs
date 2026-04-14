@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-using UnityEngine.InputSystem;
+
 public class PlayerController : MonoBehaviour
 {
     [Header("References")]
@@ -11,10 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CursorSlice slice;
     private bool isSlicing = false;
 
-    private IPlayerInput _input;
-
-    [Inject]
-    public void Construct(IPlayerInput input) => _input = input;
+    [Inject] readonly private IPlayerInput _input;
 
     private void Awake()
     {
