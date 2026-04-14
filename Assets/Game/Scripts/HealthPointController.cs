@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -9,7 +10,7 @@ namespace Game
         public ReactiveVariableClamped Health { get; private set; }
 
         public int MaxHealth { get; private set; }
-        public bool IsDead { get; private set; }
+        public bool IsDead => Health.Value <= 0;
 
         public HealthPointController(int maxHealth) : this(maxHealth, maxHealth) { }
 
@@ -26,6 +27,8 @@ namespace Game
                 return;
 
             Health.Value -= damage;
+
+            Debug.Log("HP: " + Health.Value);
         }
 
         public void TakeHeal(int heal)
@@ -43,7 +46,6 @@ namespace Game
 
             if (newValue <= 0)
             {
-                IsDead = true;
                 OnDeath?.Invoke();
             }
         }
@@ -55,7 +57,6 @@ namespace Game
 
             Health = null;
             MaxHealth = 0;
-            IsDead = false;
         }
     }
 }

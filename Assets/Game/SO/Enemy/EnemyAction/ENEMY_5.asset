@@ -32,7 +32,7 @@ MonoBehaviour:
     - rid: 615779620481925440
       type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _movementSpeed: 5
+        _movementSpeed: 0
         _moveDirection: {x: 1, y: 0, z: 0}
         _maxMoveDistance: -1
     - rid: 615779620481925441

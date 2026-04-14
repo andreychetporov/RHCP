@@ -48,11 +48,15 @@ public class CursorSlice : MonoBehaviour
     {
         RaycastHit[] hits = Physics.RaycastAll(previousMSP, currentMSP);
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
         if (Physics.Raycast(ray, out RaycastHit hit, 100.0f))
         {
-            EnemyController enemy = hit.collider.GetComponent<EnemyController>();
+            Debug.Log(hit.collider.gameObject.name);
 
-            if (enemy != null) { 
+            EnemyController enemy = hit.collider.GetComponentInParent<EnemyController>();
+
+            if (enemy != null) {
+                Debug.Log(enemy.EnemySO.Name);
                 enemy.HealthController.TakeDamage(weapon.damage);
             }
         }

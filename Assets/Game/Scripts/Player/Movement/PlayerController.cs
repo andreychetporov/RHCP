@@ -1,11 +1,6 @@
-using System;
-using Unity.AppUI.UI;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
-using Zenject.SpaceFighter;
 
 public class PlayerController : MonoBehaviour
 {
@@ -26,12 +21,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image hud;
     [SerializeField] private WeaponSO weapon;
 
+    [Inject] private IPlayerInput _input;
 
     private bool isSlicing = false;
-    private IPlayerInput _input;
-
-    [Inject]
-    public void Construct(IPlayerInput input) => _input = input;
 
     private void Awake()
     {
@@ -62,7 +54,7 @@ public class PlayerController : MonoBehaviour
     public void EquipWeapon(WeaponSO newWeapon)
     {
         weapon = newWeapon;
-        hud.transform.localScale = new Vector3(weapon.damageRadius, weapon.damageRadius, 0.0f);
+        //hud.transform.localScale = new Vector3(weapon.damageRadius, weapon.damageRadius, 0.0f);
         slice.SetWeapon(newWeapon);
     }
     private void FixedUpdate()
@@ -97,11 +89,7 @@ public class PlayerController : MonoBehaviour
         RotateCharacter();
     }
 
-    private void Update()
-    {
-        ManageSliceState();
-        
-    }
+    private void Update() => ManageSliceState();
 
     private void ManageSliceState()
     {
@@ -112,11 +100,11 @@ public class PlayerController : MonoBehaviour
             slice.SetEmitting(true);
         }
 
-        bool isCursorInRange = RectTransformUtility.RectangleContainsScreenPoint(hud.rectTransform, Mouse.current.position.ReadValue(), null);
-        if (!isCursorInRange)
-        {
-            isSlicing = false;
-        }
+        //bool isCursorInRange = RectTransformUtility.RectangleContainsScreenPoint(hud.rectTransform, Mouse.current.position.ReadValue(), null);
+        //if (!isCursorInRange)
+        //{
+        //    isSlicing = false;
+        //}
 
         if (isSlicing)
             slice.UpdateSlice();
