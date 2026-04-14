@@ -51,6 +51,12 @@ public class RunLevelController : MonoBehaviour
             _playerSpawnPoint.rotation,
             null
         );
+
+        PlayerHealth playerHealth = _spawnedPlayer.GetComponent<PlayerHealth>();
+        PlayerHealthUI healthUI = FindAnyObjectByType<PlayerHealthUI>();
+
+        if (playerHealth != null && healthUI != null)
+            healthUI.SetPlayerHealth(playerHealth);
     }
 
     public void StartRun()
