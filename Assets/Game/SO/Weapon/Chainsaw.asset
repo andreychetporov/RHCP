@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a84aed2505fe1b408f3772287eae7df, type: 3}
+  m_Name: Chainsaw
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
+  weaponName: 
+  model: {fileID: 0}
+  trailMaterial: {fileID: 2100000, guid: c78b5dacb6e1a8343bb1dfe2c4161830, type: 2}
+  damage: 5
+  audioClip: {fileID: 0}
+  damageRadius: 5.5

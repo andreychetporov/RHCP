@@ -120,8 +120,8 @@ MonoBehaviour:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        _xMultiplier: 30
-        _yMultiplier: 10
+        _xMultiplier: 9
+        _yMultiplier: 3
         _moveSpeed: 0.75
     - rid: 6617142742666707036
       type: {class: LookAtVelocityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}

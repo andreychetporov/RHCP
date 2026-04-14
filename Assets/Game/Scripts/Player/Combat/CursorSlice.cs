@@ -5,10 +5,10 @@ using Game.Enemy;
 [RequireComponent(typeof(TrailRenderer))]
 public class CursorSlice : MonoBehaviour
 {
-    [SerializeField] private WeaponSO weapon;
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private float sliceLenght = 100.0f;
     [SerializeField] private float distanceFromCamera = 10f;
+    private WeaponSO weapon;
 
     private Vector2 previousMSP; //MSP - mouse screen pos
     private Vector2 currentMSP; 
@@ -22,7 +22,13 @@ public class CursorSlice : MonoBehaviour
 
     public void SetEmitting(bool isEmitting)
     {
+
         trail.emitting = isEmitting;
+    }
+    public void SetWeapon(WeaponSO newWeapon)
+    {
+        weapon = newWeapon;
+        trail.material = weapon.trailMaterial;
     }
     public void UpdateSlice()
     {
@@ -47,7 +53,7 @@ public class CursorSlice : MonoBehaviour
             EnemyController enemy = hit.collider.GetComponent<EnemyController>();
 
             if (enemy != null) { 
-                enemy.HealthController.TakeDamage(1);
+                enemy.HealthController.TakeDamage(weapon.damage);
             }
         }
 

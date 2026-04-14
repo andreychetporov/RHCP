@@ -6,6 +6,7 @@ public class PlayerMovementMotor : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GroundProbe groundProbe;
+    [SerializeField] private LandingSquash landingSquash;
 
     [Header("Movement")]
     [SerializeField] private float maxSpeed = 7f;
@@ -30,6 +31,7 @@ public class PlayerMovementMotor : MonoBehaviour
     private float _dashTimer;
     private float _dashCooldownTimer;
     private float _dashDirection;
+    private float _lastInputDirection = 1f;
 
     public bool IsDashing => _isDashing;
     public bool CanDash => !_isDashing && _dashCooldownTimer <= 0f;
@@ -40,8 +42,23 @@ public class PlayerMovementMotor : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Awake()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+
+        if (groundProbe == null)
+            groundProbe = GetComponent<GroundProbe>();
+
+        if (landingSquash == null)
+            landingSquash = GetComponent<LandingSquash>();
+    }
+
     public void TickMove(float moveInput, bool crouchHeld, float fixedDeltaTime)
     {
+        if (Mathf.Abs(moveInput) > 0.01f)
+            _lastInputDirection = Mathf.Sign(moveInput);
+
         if (_dashCooldownTimer > 0f)
             _dashCooldownTimer -= fixedDeltaTime;
 
@@ -94,25 +111,15 @@ public class PlayerMovementMotor : MonoBehaviour
         if (crouchHeld)
             return false;
 
-        float dashDir;
-
         if (Mathf.Abs(moveInput) > 0.01f)
-        {
-            dashDir = Mathf.Sign(moveInput);
-        }
-        else if (Mathf.Abs(rb.linearVelocity.x) > 0.01f)
-        {
-            dashDir = Mathf.Sign(rb.linearVelocity.x);
-        }
-        else
-        {
-            dashDir = 1f;
-        }
+            _lastInputDirection = Mathf.Sign(moveInput);
 
         _isDashing = true;
         _dashTimer = dashDuration;
         _dashCooldownTimer = dashCooldown;
-        _dashDirection = dashDir;
+        _dashDirection = _lastInputDirection;
+
+        landingSquash?.NotifyDashed();
 
         return true;
     }
