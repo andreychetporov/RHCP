@@ -1,5 +1,4 @@
 using Game.Enemy;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Zenject

@@ -50,7 +50,6 @@ namespace Game.Enemy
             Instantiate(EnemySO.ModelPrefab, _meshParent);
         }
 
-
 #if UNITY_EDITOR
         private void OnValidate()
         {
