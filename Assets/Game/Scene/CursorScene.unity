@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 462522566}
   - component: {fileID: 462522565}
   - component: {fileID: 462522564}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1021,6 +1021,10 @@ PrefabInstance:
       propertyPath: slice
       value: 
       objectReference: {fileID: 440088567}
+    - target: {fileID: 3580948323691281400, guid: df5edc79637de9547a1b3a29b6045de0, type: 3}
+      propertyPath: groundMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3782099472976622873, guid: df5edc79637de9547a1b3a29b6045de0, type: 3}
       propertyPath: m_Layer
       value: 6
