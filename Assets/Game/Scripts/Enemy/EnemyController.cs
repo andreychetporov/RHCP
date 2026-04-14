@@ -12,7 +12,9 @@ namespace Game.Enemy
 
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
+        private MeshRenderer[] meshRenderer;
 
+        [SerializeField] private AudioClip clip;
         public BaseEnemyActionController ActionController { get; protected set; }
 
         public HealthPointController HealthController { get; protected set; }
@@ -29,14 +31,20 @@ namespace Game.Enemy
         public void Initialize(EnemySO enemySO)
         {
             EnemySO = enemySO;
-
+   
             ActionController.Initialize(EnemySO.Behavior);
             HealthController = new HealthPointController(EnemySO.Characteristics.Health);
 
             SetupModel();
 
             gameObject.name = $"Enemy_{EnemySO.Name}";
+            HealthController.Health.OnValueChanged += HealthOnValueChanged;
         }
+        private void HealthOnValueChanged(int arg1, int arg2)
+        {
+            AudioSource.PlayClipAtPoint(clip, transform.position);
+        }
+
 
         private void SetupModel()
         {
@@ -48,6 +56,7 @@ namespace Game.Enemy
             }
 
             Instantiate(EnemySO.ModelPrefab, _meshParent);
+            
         }
 
 #if UNITY_EDITOR
