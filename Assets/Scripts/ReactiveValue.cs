@@ -1,26 +1,48 @@
 using System;
+using System.Collections.Generic;
 
-public class ReactiveValue<T>
+public class ReactiveVariable<T> : IDisposable
 {
-    private T _value;
+    public event Action<T, T> OnValueChanged;
 
-    public T Value
+    private T _value;
+    private IEqualityComparer<T> _comparer;
+
+    public ReactiveVariable() : this(default(T), EqualityComparer<T>.Default)
+    {
+    }
+
+    public ReactiveVariable(T value) : this(value, EqualityComparer<T>.Default)
+    {
+    }
+
+    public ReactiveVariable(T value, IEqualityComparer<T> comparer)
+    {
+        _value = value;
+        _comparer = comparer;
+    }
+
+    public virtual T Value
     {
         get => _value;
         set
         {
-            if (!Equals(_value, value))
+            T oldValue = _value;
+
+            _value = value;
+
+            if (!_comparer.Equals(value, oldValue))
             {
-                _value = value;
-                OnChanged?.Invoke(_value);
+                OnValueChanged?.Invoke(oldValue, _value);
             }
         }
     }
 
-    public event Action<T> OnChanged;
-
-    public ReactiveValue(T initialValue)
+    public virtual void Dispose()
     {
-        _value = initialValue;
+        _comparer = default;
+        _value = default;
+
+        OnValueChanged = null;
     }
 }
