@@ -42,6 +42,8 @@ namespace Game.Enemy.Action
             Vector3 origin = owner.transform.position + Vector3.up * 0.1f;
             Vector3 forward = owner.transform.right;
 
+            Debug.DrawRay(origin, forward * _checkDistance, Color.yellow);
+
             if (Physics.Raycast(origin, forward, out RaycastHit wallHit, _checkDistance, _groundLayer))
             {
                 Vector3 highOrigin = origin + Vector3.up * _maxJumpHeight;

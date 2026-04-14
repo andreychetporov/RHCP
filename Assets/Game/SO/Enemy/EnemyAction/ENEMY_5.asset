@@ -22,27 +22,28 @@ MonoBehaviour:
       data:
         _count: -1
         Child:
-          rid: 615779620481925439
-    - rid: 615779620481925439
-      type: {class: ParallelEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+          rid: 6617142789381816388
+    - rid: 6617142789381816388
+      type: {class: DoSecondWhileMainRunningEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        Children:
-        - rid: 615779620481925440
-        - rid: 615779620481925441
-    - rid: 615779620481925440
+        _mainAction:
+          rid: 6617142789381816389
+        _secondAction:
+          rid: 6617142789381816390
+    - rid: 6617142789381816389
       type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _movementSpeed: 0
+        _movementSpeed: 5
         _moveDirection: {x: 1, y: 0, z: 0}
         _maxMoveDistance: -1
-    - rid: 615779620481925441
+    - rid: 6617142789381816390
       type: {class: AutoJumpEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
         _groundLayer:
           serializedVersion: 2
           m_Bits: 8
-        _checkDistance: 3
-        _maxJumpHeight: 2
+        _checkDistance: 1
+        _maxJumpHeight: 5
         _maxSafeFallDepth: 3
-        _jumpForce: 7
+        _jumpForce: 13.18
         _forwardJumpImpulse: 2

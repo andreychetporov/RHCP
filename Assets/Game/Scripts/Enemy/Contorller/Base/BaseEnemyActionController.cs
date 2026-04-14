@@ -6,7 +6,7 @@ namespace Game.Enemy.Action
     {
         [System.NonSerialized] public Vector3 TargetVelocity;
         [System.NonSerialized] public Vector3 TargetAngularVelocity;
-        [System.NonSerialized] public float Gravity = -9.81f;
+        [System.NonSerialized] public float Gravity = -20.0f;
 
         public bool IsJumping { get; protected set; }
         public abstract bool IsGrounded { get; }
