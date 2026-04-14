@@ -1,6 +1,8 @@
 using UnityEngine;
 using Zenject;
 using UnityEngine.InputSystem;
+using Unity.Mathematics;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float minRotateVelocity = 0.05f;
     [SerializeField] private Vector3 modelForwardAxis = Vector3.right;
+
+
+    [SerializeField] private WeaponSO weapon;
 
     private bool isSlicing = false;
     private IPlayerInput _input;
@@ -43,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         if (rb == null)
             rb = GetComponent<Rigidbody>();
+        slice.SetWeapon(weapon);
     }
 
     private void FixedUpdate()
@@ -82,8 +88,14 @@ public class PlayerController : MonoBehaviour
         if (_input.MousePressed && !isSlicing)
         {
             slice.Reset();
-            slice.SetEmitting(true);
             isSlicing = true;
+            slice.SetEmitting(true);
+        }
+
+        bool isCursorInRange = Math.Abs(slice.transform.localPosition.x) <= weapon.damageRadius && Math.Abs(slice.transform.localPosition.y) <= weapon.damageRadius;
+        if (!isCursorInRange)
+        {
+            isSlicing = false;
         }
 
         if (isSlicing)
@@ -94,6 +106,7 @@ public class PlayerController : MonoBehaviour
             slice.SetEmitting(false);
             isSlicing = false;
         }
+
     }
 
     private void RotateCharacter()
@@ -115,4 +128,5 @@ public class PlayerController : MonoBehaviour
             rotationSpeed * Time.fixedDeltaTime
         );
     }
+
 }
