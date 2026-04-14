@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Game.Enemy;
 
 [RequireComponent(typeof(TrailRenderer))]
 public class CursorSlice : MonoBehaviour
@@ -43,10 +44,10 @@ public class CursorSlice : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out RaycastHit hit, 100.0f))
         {
-            Enemy enemy = hit.collider.GetComponent<Enemy>();
+            EnemyController enemy = hit.collider.GetComponent<EnemyController>();
 
             if (enemy != null) { 
-                enemy.TakeDamage(1);
+                enemy.HealthController.TakeDamage(1);
             }
         }
 
