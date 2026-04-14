@@ -1,8 +1,11 @@
-using UnityEngine;
-using Zenject;
-using UnityEngine.InputSystem;
-using Unity.Mathematics;
 using System;
+using Unity.AppUI.UI;
+using Unity.Mathematics;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using Zenject;
+using Zenject.SpaceFighter;
 
 public class PlayerController : MonoBehaviour
 {
@@ -20,8 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float minRotateVelocity = 0.05f;
     [SerializeField] private Vector3 modelForwardAxis = Vector3.right;
 
-
+    [SerializeField] private Image hud;
     [SerializeField] private WeaponSO weapon;
+
 
     private bool isSlicing = false;
     private IPlayerInput _input;
@@ -48,9 +52,19 @@ public class PlayerController : MonoBehaviour
 
         if (rb == null)
             rb = GetComponent<Rigidbody>();
-        slice.SetWeapon(weapon);
     }
 
+    private void Start()
+    {
+        EquipWeapon(weapon);
+    }
+
+    public void EquipWeapon(WeaponSO newWeapon)
+    {
+        weapon = newWeapon;
+        hud.transform.localScale = new Vector3(weapon.damageRadius, weapon.damageRadius, 0.0f);
+        slice.SetWeapon(newWeapon);
+    }
     private void FixedUpdate()
     {
         float dt = Time.fixedDeltaTime;
@@ -85,6 +99,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        ManageSliceState();
+        
+    }
+
+    private void ManageSliceState()
+    {
         if (_input.MousePressed && !isSlicing)
         {
             slice.Reset();
@@ -92,7 +112,7 @@ public class PlayerController : MonoBehaviour
             slice.SetEmitting(true);
         }
 
-        bool isCursorInRange = Math.Abs(slice.transform.localPosition.x) <= weapon.damageRadius && Math.Abs(slice.transform.localPosition.y) <= weapon.damageRadius;
+        bool isCursorInRange = RectTransformUtility.RectangleContainsScreenPoint(hud.rectTransform, Mouse.current.position.ReadValue(), null);
         if (!isCursorInRange)
         {
             isSlicing = false;
@@ -106,7 +126,6 @@ public class PlayerController : MonoBehaviour
             slice.SetEmitting(false);
             isSlicing = false;
         }
-
     }
 
     private void RotateCharacter()
