@@ -53,28 +53,28 @@ namespace Game.Enemy
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            EditorApplication.delayCall += () =>
-            {
-                if (this == null || _meshParent == null) { return; }
-                if (_enemySO == null) { return; }
+            //EditorApplication.delayCall += () =>
+            //{
+            //    if (this == null || _meshParent == null) { return; }
+            //    if (_enemySO == null) { return; }
 
-                EnemySO = _enemySO;
+            //    EnemySO = _enemySO;
 
-                if (_meshParent == null)
-                    return;
+            //    if (_meshParent == null)
+            //        return;
 
-                for (int i = _meshParent.childCount - 1; i >= 0; i--)
-                {
-                    DestroyImmediate(_meshParent.GetChild(i).gameObject);
-                }
+            //    for (int i = _meshParent.childCount - 1; i >= 0; i--)
+            //    {
+            //        DestroyImmediate(_meshParent.GetChild(i).gameObject);
+            //    }
 
-                if (EnemySO.ModelPrefab != null)
-                {
-                    Instantiate(EnemySO.ModelPrefab, _meshParent);
-                }
+            //    if (EnemySO.ModelPrefab != null)
+            //    {
+            //        Instantiate(EnemySO.ModelPrefab, _meshParent);
+            //    }
 
-                gameObject.name = $"Enemy_{EnemySO.Name}";
-            };
+            //    gameObject.name = $"Enemy_{EnemySO.Name}";
+            //};
         }
 #endif
     }

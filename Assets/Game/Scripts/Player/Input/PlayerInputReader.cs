@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using System.Numerics;
-using UnityEngine.InputSystem;
-
 public class PlayerInputReader : IPlayerInput
 {
     private readonly PlayerInputActions _actions;
