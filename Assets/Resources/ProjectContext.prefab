@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8348332600692292992}
   - component: {fileID: 4130852181277900834}
   - component: {fileID: 4178287159433640309}
+  - component: {fileID: 1826445212117212389}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 4130852181277900834}
   - {fileID: 4178287159433640309}
+  - {fileID: 1826445212117212389}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -76,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24b0ed5a728cf8d4397f8f16ed28a684, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Zenject.PrefabInstaller
-  _enemyPrefab: {fileID: 0}
+  _enemyPrefab: {fileID: 8624876400406640263, guid: 312d4a673b21ce54abb4b919f02b6adf, type: 3}
 --- !u!114 &4178287159433640309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,3 +91,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc24cd3f0780c354185f207994723c95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Zenject.FactoryInstaller
+--- !u!114 &1826445212117212389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2499590207383175104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc07a45e9a9112c41a97170632dfeeb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSceneInstaller
