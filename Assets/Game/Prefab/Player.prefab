@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 5
+  damageCooldown: 3
 --- !u!1 &3943844425052145861
 GameObject:
   m_ObjectHideFlags: 0
