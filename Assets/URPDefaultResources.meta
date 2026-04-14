@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/URPDefaultResources.meta
+guid: b5b2c9de22771ab4c843893edff9e3a1
+========
+guid: 85bb0dc09313e2f47a098246aaca0f9d
+>>>>>>>> main:Assets/Game/Scripts/Enemy/Factory.meta
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

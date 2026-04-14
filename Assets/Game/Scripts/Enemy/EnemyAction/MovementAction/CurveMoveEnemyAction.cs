@@ -22,13 +22,17 @@ namespace Game.Enemy.Action
         [System.NonSerialized] private float _xTimeLength;
         [System.NonSerialized] private float _yTimeLength;
 
+        [System.NonSerialized] private float _directionSign;
+
         public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
 
             _timer = 0.0f;
             _startPos = owner.transform.position;
-            
+
+            _directionSign = Mathf.Sign(owner.transform.forward.z);
+
             _xTimeLength = _xCurve == null || _xCurve.length == 0 ? 0.0f : _xCurve.keys.Select(k => k.time).Max();
             _yTimeLength = _yCurve == null || _yCurve.length == 0 ? 0.0f : _yCurve.keys.Select(k => k.time).Max();
 
@@ -44,7 +48,7 @@ namespace Game.Enemy.Action
             float tX = Mathf.Clamp01(_timer / _xTimeLength);
             float tY = Mathf.Clamp01(_timer / _yTimeLength);
 
-            float x = _xCurve.Evaluate(tX * _xTimeLength) * _xMultiplier;
+            float x = _xCurve.Evaluate(tX * _xTimeLength) * _xMultiplier * _directionSign;
             float y = _yCurve.Evaluate(tY * _yTimeLength) * _yMultiplier;
 
             Vector3 targetPos = _startPos + new Vector3(x, y, 0);
