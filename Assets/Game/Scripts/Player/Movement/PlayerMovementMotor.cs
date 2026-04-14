@@ -6,6 +6,7 @@ public class PlayerMovementMotor : MonoBehaviour
     [Header("References")]
     [SerializeField] private Rigidbody rb;
     [SerializeField] private GroundProbe groundProbe;
+    [SerializeField] private LandingSquash landingSquash;
 
     [Header("Movement")]
     [SerializeField] private float maxSpeed = 7f;
@@ -38,6 +39,18 @@ public class PlayerMovementMotor : MonoBehaviour
     private void Reset()
     {
         rb = GetComponent<Rigidbody>();
+    }
+
+    private void Awake()
+    {
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+
+        if (groundProbe == null)
+            groundProbe = GetComponent<GroundProbe>();
+
+        if (landingSquash == null)
+            landingSquash = GetComponent<LandingSquash>();
     }
 
     public void TickMove(float moveInput, bool crouchHeld, float fixedDeltaTime)
@@ -113,6 +126,8 @@ public class PlayerMovementMotor : MonoBehaviour
         _dashTimer = dashDuration;
         _dashCooldownTimer = dashCooldown;
         _dashDirection = dashDir;
+
+        landingSquash?.NotifyDashed();
 
         return true;
     }
