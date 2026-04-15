@@ -30,6 +30,8 @@ namespace Game.Enemy
 
         public void Initialize(EnemySO enemySO)
         {
+
+
             EnemySO = enemySO;
    
             ActionController.Initialize(EnemySO.Behavior);
@@ -39,10 +41,19 @@ namespace Game.Enemy
 
             gameObject.name = $"Enemy_{EnemySO.Name}";
             HealthController.Health.OnValueChanged += HealthOnValueChanged;
+            HealthController.OnDeath += HealthController_OnDeath;
         }
+
+        private void HealthController_OnDeath()
+        {
+            gameObject.SetActive(false);
+        }
+
         private void HealthOnValueChanged(int arg1, int arg2)
         {
             AudioSource.PlayClipAtPoint(clip, transform.position);
+
+
         }
 
 
