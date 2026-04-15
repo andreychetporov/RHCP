@@ -50,9 +50,8 @@ namespace Game.Enemy
         {
             if (HealthController.IsDead) { return; }
 
-            AudioSource.PlayClipAtPoint(clip, transform.position);
+            //AudioSource.PlayClipAtPoint(clip, transform.position); временно закомментил
         }
-
 
         private void SetupModel()
         {

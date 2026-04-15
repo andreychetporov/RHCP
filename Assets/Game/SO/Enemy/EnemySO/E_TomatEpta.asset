@@ -19,5 +19,5 @@ MonoBehaviour:
   ModelPrefab: {fileID: 6750119071894398336, guid: 94974d831a6fb5d4998ff3e7da77aca9, type: 3}
   Behavior: {fileID: 11400000, guid: a22c41719da7c544da2313f329439431, type: 2}
   Characteristics:
-    Damage: 4
-    Health: 1
+    Damage: 1
+    Health: 10

@@ -234,6 +234,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8624876400406640263, guid: 312d4a673b21ce54abb4b919f02b6adf, type: 3}
+      propertyPath: clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f9517356afb533a41b9e7cb6f155031e, type: 3}
+    - target: {fileID: 8624876400406640263, guid: 312d4a673b21ce54abb4b919f02b6adf, type: 3}
       propertyPath: _enemySO
       value: 
       objectReference: {fileID: 11400000, guid: d3df566f4179f3c42994a849eb798020, type: 2}
