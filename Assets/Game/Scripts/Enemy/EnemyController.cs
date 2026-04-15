@@ -7,9 +7,6 @@ namespace Game.Enemy
     [RequireComponent(typeof(BaseEnemyActionController))]
     public class EnemyController : MonoBehaviour
     {
-        [Header("Referenece")]
-        [SerializeField] private Transform _meshParent;
-
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
         private MeshRenderer[] meshRenderer;
@@ -59,15 +56,14 @@ namespace Game.Enemy
 
         private void SetupModel()
         {
-            if (_meshParent == null || EnemySO.ModelPrefab == null) { return; }
+            if (ActionController.VisualModel == null || EnemySO.ModelPrefab == null) { return; }
 
-            for (int i = _meshParent.childCount - 1; i >= 0; i--)
+            for (int i = ActionController.VisualModel.childCount - 1; i >= 0; i--)
             {
-                Destroy(_meshParent.GetChild(i).gameObject);
+                Destroy(ActionController.VisualModel.GetChild(i).gameObject);
             }
 
-            Instantiate(EnemySO.ModelPrefab, _meshParent);
-            
+            Instantiate(EnemySO.ModelPrefab, ActionController.VisualModel);
         }
 
 #if UNITY_EDITOR
@@ -75,21 +71,22 @@ namespace Game.Enemy
         {
             EditorApplication.delayCall += () =>
             {
-                if (this == null || _meshParent == null) { return; }
-                if (_enemySO == null) { return; }
+                if (this == null) { return; }
 
+                if (_enemySO == null) { return; }
                 EnemySO = _enemySO;
 
-                if (_meshParent == null) { return; }
+                BaseEnemyActionController temp = GetComponent<BaseEnemyActionController>();
+                if (temp == null || temp.VisualModel == null) { return; }
 
-                for (int i = _meshParent.childCount - 1; i >= 0; i--)
+                for (int i = temp.VisualModel.childCount - 1; i >= 0; i--)
                 {
-                    DestroyImmediate(_meshParent.GetChild(i).gameObject);
+                    DestroyImmediate(temp.VisualModel.GetChild(i).gameObject);
                 }
 
                 if (EnemySO.ModelPrefab != null)
                 {
-                    Instantiate(EnemySO.ModelPrefab, _meshParent);
+                    Instantiate(EnemySO.ModelPrefab, temp.VisualModel);
                 }
 
                 gameObject.name = $"Enemy_{EnemySO.Name}";

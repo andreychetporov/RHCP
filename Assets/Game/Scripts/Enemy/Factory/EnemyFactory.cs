@@ -22,14 +22,19 @@ namespace Game.Enemy
                 }
             }
 
-            if (enemy == null) { enemy = GameObject.Instantiate(_prefab, spawnTransform); }
-            else { enemy.transform.parent = spawnTransform; }
+            if (enemy == null)
+            {
+                enemy = GameObject.Instantiate(_prefab, spawnTransform.position, spawnTransform.rotation);
+            }
+            else
+            {
+                enemy.transform.position = spawnTransform.position;
+                enemy.transform.rotation = spawnTransform.rotation;
+            }
+
             enemy.Initialize(enemySO);
 
             Debug.Log($"Factory {enemy.gameObject}");
-
-            enemy.transform.position = spawnTransform.position;
-            enemy.transform.rotation = spawnTransform.rotation;
 
             return enemy;
         }

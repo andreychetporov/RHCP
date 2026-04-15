@@ -25,7 +25,7 @@ namespace Game.Enemy.Action
             _startPosition = owner.transform.position;
             _worldDirection = owner.transform.TransformDirection(_moveDirection.normalized);
 
-            if (_maxMoveDistance < 0.0f)
+            if (_maxMoveDistance >= 0.0f)
             {
                 _endPosition = _startPosition + _worldDirection * _movementSpeed;
             }
@@ -52,6 +52,8 @@ namespace Game.Enemy.Action
             {
                 owner.transform.position = _endPosition.Value;
             }
+
+            owner.TargetVelocity = Vector3.up * owner.TargetVelocity.y;
         }
     }
 }

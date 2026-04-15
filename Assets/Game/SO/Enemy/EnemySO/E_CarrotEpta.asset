@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e3d38fc90a5c2044b93714760140e666, type: 3}
-  m_Name: E_SmoothCucumber
+  m_Name: E_CarrotEpta
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.EnemySO
-  Name: "\u0413\u043B\u0430\u0434\u043A\u0438\u0439 \u041E\u0433\u0443\u0440\u0435\u0446"
-  Description: "\u0417\u0435\u043B\u0451\u043D\u0430\u044F \u0437\u0430\u043B\u0443\u043F\u0430"
+  Name: "\u041C\u043E\u0440\u043A\u043E\u0432\u043A\u0430"
+  Description: "\u041E\u0440\u0430\u043D\u0436\u0435\u0430\u044F \u0437\u0430\u043B\u0443\u043F\u0430"
   Icon: {fileID: 0}
-  ModelPrefab: {fileID: 6750119071894398336, guid: 9f54e744f6d21704e96486494eb2c99c, type: 3}
-  Behavior: {fileID: 11400000, guid: b650a7f8fb4e29b4fbe2c1aba82c61c5, type: 2}
+  ModelPrefab: {fileID: 6750119071894398336, guid: 9be4c6cebe478ff4db38bc792b29977c, type: 3}
+  Behavior: {fileID: 11400000, guid: b7d36df3bde33c14fbe79a4ea786ebbe, type: 2}
   Characteristics:
     Damage: 1
-    Health: 249
+    Health: 5

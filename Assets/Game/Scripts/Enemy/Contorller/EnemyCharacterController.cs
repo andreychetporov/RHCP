@@ -7,7 +7,6 @@ namespace Game.Enemy
     public class EnemyCharacterController : BaseEnemyActionController
     {
         [Header("Reference")]
-        [SerializeField] private Transform _model;
         [SerializeField] private GroundProbe _groundProbe;
 
         [Header("GroundCheck")]
@@ -59,9 +58,9 @@ namespace Game.Enemy
         {
             _rb = GetComponent<Rigidbody>();
 
-            if (_model != null)
+            if (VisualModel != null)
             {
-                _baseScale = _model.localScale;
+                _baseScale = VisualModel.localScale;
             }
 
             _rb.isKinematic = true;
@@ -192,7 +191,7 @@ namespace Game.Enemy
 
         private void SquashUpdate(float dt)
         {
-            if (!SquashEnabled || _model == null)
+            if (!SquashEnabled || VisualModel == null)
             {
                 return;
             }
@@ -215,7 +214,7 @@ namespace Game.Enemy
             float scaleY = _baseScale.y * (1f + _springValue);
             float scaleXZ = 1f - _springValue * 0.5f;
 
-            _model.localScale = new Vector3(
+            VisualModel.localScale = new Vector3(
                 _baseScale.x * scaleXZ,
                 scaleY,
                 _baseScale.z * scaleXZ
