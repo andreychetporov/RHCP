@@ -48,9 +48,9 @@ namespace Game.Enemy
 
         private void HealthOnValueChanged(int arg1, int arg2)
         {
+            if (HealthController.IsDead) { return; }
+
             AudioSource.PlayClipAtPoint(clip, transform.position);
-
-
         }
 
 
