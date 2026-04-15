@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Enemy.Action
 {
@@ -14,13 +14,10 @@ namespace Game.Enemy.Action
         [SerializeReference] private EnemyAction _falseAction;
 
         [System.NonSerialized] private EnemyAction _currentAction;
-        [System.NonSerialized] private bool _initialized;
 
         public override void Enter(BaseEnemyActionController owner)
         {
             base.Enter(owner);
-
-            _initialized = false;
             _currentAction = null;
         }
 
@@ -28,10 +25,19 @@ namespace Game.Enemy.Action
         {
             bool result = _condition.Evaluate(owner);
 
-            if (!_initialized)
+            EnemyAction desiredAction = result ? _trueAction : _falseAction;
+
+            if (_currentAction != desiredAction)
             {
-                Switch(owner, result);
-                _initialized = true;
+                _currentAction?.Exit(owner);
+
+                _currentAction = desiredAction;
+
+                if (_currentAction != null)
+                {
+                    _currentAction.Status = ActionStatus.Running;
+                    _currentAction.Enter(owner);
+                }
             }
 
             if (_currentAction != null)
@@ -53,19 +59,6 @@ namespace Game.Enemy.Action
         {
             _currentAction?.Exit(owner);
             _currentAction = null;
-        }
-
-        private void Switch(BaseEnemyActionController owner, bool result)
-        {
-            _currentAction?.Exit(owner);
-
-            _currentAction = result ? _trueAction : _falseAction;
-
-            if (_currentAction != null)
-            {
-                _currentAction.Status = ActionStatus.Running;
-                _currentAction.Enter(owner);
-            }
         }
     }
 }

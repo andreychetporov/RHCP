@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace Game.Enemy
 {
-    [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(Rigidbody))]
     public class EnemyCharacterController : BaseEnemyActionController
     {
         [Header("Reference")]
-        [SerializeField] private Transform _model;
         [SerializeField] private GroundProbe _groundProbe;
 
         [Header("GroundCheck")]
@@ -37,9 +36,11 @@ namespace Game.Enemy
         [SerializeField] private float _hitSlowDownSpeed = 18f;
         [SerializeField] private float _hitRecoverSpeed = 8f;
 
-        private CharacterController _controller;
+        private Rigidbody _rb;
 
         private bool _wasGrounded;
+        private bool _wasJumping;
+
         private float _springValue;
         private float _springVelocity;
         private float _lastVerticalVelocity;
@@ -50,63 +51,117 @@ namespace Game.Enemy
         private float _currentMoveSpeedMultiplier = 1f;
 
         public override bool IsGrounded => SuspensionEnabled
-            ? _groundProbe.GroundDistance <= _groundDistance
-            : _groundProbe.IsGrounded;
+            ? _groundProbe != null && _groundProbe.HasHit && _groundProbe.GroundDistance <= _groundDistance
+            : _groundProbe != null && _groundProbe.IsGrounded;
 
         private void Awake()
         {
-            _controller = GetComponent<CharacterController>();
-            _baseScale = _model.localScale;
+            _rb = GetComponent<Rigidbody>();
+
+            if (VisualModel != null)
+            {
+                _baseScale = VisualModel.localScale;
+            }
+
+            _rb.isKinematic = true;
+            _rb.useGravity = false;
+        }
+
+        private void Reset()
+        {
+            _rb = GetComponent<Rigidbody>();
+
+            if (_rb != null)
+            {
+                _rb.isKinematic = true;
+                _rb.useGravity = false;
+                _rb.interpolation = RigidbodyInterpolation.Interpolate;
+            }
         }
 
         public override void SetCollisionData(bool detectCollisions, LayerMask includeLayers, LayerMask excludeLayers)
         {
-            _controller.detectCollisions = detectCollisions;
-            _controller.includeLayers = includeLayers;
-            _controller.excludeLayers = excludeLayers;
+            _rb.detectCollisions = detectCollisions;
+            _rb.includeLayers = includeLayers;
+            _rb.excludeLayers = excludeLayers;
         }
 
         public override void ApplyHitSlow()
         {
-            if (!_hitSlowEnabled) { return; }
+            if (!_hitSlowEnabled)
+            {
+                return;
+            }
 
             _hitSlowTimer = _hitSlowDuration;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            float dt = Time.deltaTime;
+            float dt = Time.fixedDeltaTime;
+
+            if (_groundProbe != null)
+            {
+                _groundProbe.TickProbe();
+            }
+
+            if (IsJumping && !_wasJumping)
+            {
+                NotifyJumped();
+            }
+
             _lastVerticalVelocity = TargetVelocity.y;
 
             GravityHandle(dt);
             BehaviorHandle(dt);
             UpdateHitSlow(dt);
 
-            Vector3 finalVelocity = GetSlowedVelocity(TargetVelocity);
-
-            if (TargetAngularVelocity.sqrMagnitude > 0.0001f)
-            {
-                Vector3 slowedAngularVelocity = TargetAngularVelocity * _currentMoveSpeedMultiplier;
-
-                float angleRad = slowedAngularVelocity.magnitude * dt;
-                float angleDeg = angleRad * Mathf.Rad2Deg;
-
-                if (angleDeg > 0.0001f)
-                {
-                    transform.rotation =
-                        Quaternion.AngleAxis(angleDeg, slowedAngularVelocity.normalized) * transform.rotation;
-                }
-            }
-
-            _controller.Move(finalVelocity * dt);
-
-            SquashUpdate();
-            _groundProbe.TickProbe();
-
             if (SuspensionEnabled)
             {
                 TickSuspension(dt);
             }
+
+            Vector3 finalVelocity = GetSlowedVelocity(TargetVelocity);
+            Move(finalVelocity, dt);
+            Rotate(dt);
+
+            if (_groundProbe != null)
+            {
+                _groundProbe.TickProbe();
+            }
+
+            SquashUpdate(dt);
+
+            _wasJumping = IsJumping;
+        }
+
+        private void Move(Vector3 velocity, float dt)
+        {
+            Vector3 targetPosition = _rb.position + velocity * dt;
+            _rb.MovePosition(targetPosition);
+        }
+
+        private void Rotate(float dt)
+        {
+            if (TargetAngularVelocity.sqrMagnitude <= 0.0001f)
+            {
+                return;
+            }
+
+            Vector3 slowedAngularVelocity = TargetAngularVelocity * _currentMoveSpeedMultiplier;
+            float angleRad = slowedAngularVelocity.magnitude * dt;
+
+            if (angleRad <= 0.0001f)
+            {
+                return;
+            }
+
+            Quaternion deltaRotation = Quaternion.AngleAxis(
+                angleRad * Mathf.Rad2Deg,
+                slowedAngularVelocity.normalized
+            );
+
+            _rb.MoveRotation(deltaRotation * _rb.rotation);
         }
 
         private void UpdateHitSlow(float dt)
@@ -134,32 +189,51 @@ namespace Game.Enemy
             return new Vector3(horizontal.x, velocity.y, horizontal.z);
         }
 
-        private void SquashUpdate()
+        private void SquashUpdate(float dt)
         {
-            if (!SquashEnabled) { return; }
+            if (!SquashEnabled || VisualModel == null)
+            {
+                return;
+            }
 
             bool grounded = IsGrounded;
 
-            if (grounded && !_wasGrounded) { OnLand(); }
+            if (grounded && !_wasGrounded)
+            {
+                OnLand();
+            }
 
             _wasGrounded = grounded;
 
             float springForce = -springStiffness * _springValue;
             float dampForce = -springDamping * _springVelocity;
 
-            _springVelocity += (springForce + dampForce) * Time.deltaTime;
-            _springValue += _springVelocity * Time.deltaTime;
+            _springVelocity += (springForce + dampForce) * dt;
+            _springValue += _springVelocity * dt;
 
             float scaleY = _baseScale.y * (1f + _springValue);
-            float scaleX = _baseScale.x * (1f - _springValue * 0.5f);
+            float scaleXZ = 1f - _springValue * 0.5f;
 
-            _model.localScale = new Vector3(scaleX, scaleY, scaleX);
+            VisualModel.localScale = new Vector3(
+                _baseScale.x * scaleXZ,
+                scaleY,
+                _baseScale.z * scaleXZ
+            );
+        }
+
+        private void NotifyJumped()
+        {
+            if (!SquashEnabled)
+            {
+                return;
+            }
+
+            _springVelocity += squashOnJump * springStiffness;
         }
 
         private void OnLand()
         {
             float impactSpeed = Mathf.Abs(_lastVerticalVelocity);
-
             float t = Mathf.InverseLerp(landSpeedMin, landSpeedMax, impactSpeed);
             float squash = Mathf.Lerp(squashOnLandMin, squashOnLandMax, t);
 
@@ -168,11 +242,20 @@ namespace Game.Enemy
 
         public void TickSuspension(float dt)
         {
-            if (!SuspensionEnabled) { return;}
+            if (!SuspensionEnabled)
+            {
+                return;
+            }
 
-            if (_groundProbe == null || !_groundProbe.HasHit) { return;}
+            if (_groundProbe == null || !_groundProbe.HasHit)
+            {
+                return;
+            }
 
-            if (!IsGrounded || IsJumping) { return; }
+            if (!IsGrounded || IsJumping)
+            {
+                return;
+            }
 
             Rigidbody hitBody = _groundProbe.GroundRigidbody;
 
@@ -199,11 +282,18 @@ namespace Game.Enemy
                 IsJumping = false;
             }
 
-            if (Mathf.Abs(Gravity) <= 0.001f) { return; }
+            if (Mathf.Abs(Gravity) <= 0.001f)
+            {
+                return;
+            }
 
             if (!IsGrounded)
             {
                 TargetVelocity.y += Gravity * dt;
+            }
+            else if (TargetVelocity.y < 0f)
+            {
+                TargetVelocity.y = 0f;
             }
         }
     }

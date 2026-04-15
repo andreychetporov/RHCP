@@ -36,7 +36,6 @@ public class CursorSlice : MonoBehaviour
         
         if (Vector2.Distance(previousMSP, currentMSP) > sliceLenght) 
         {
-            Debug.Log(previousMSP);
             FindEnemy();
             previousMSP = currentMSP;
         }
@@ -46,15 +45,18 @@ public class CursorSlice : MonoBehaviour
 
     private void FindEnemy()
     {
-        RaycastHit[] hits = Physics.RaycastAll(previousMSP, currentMSP);
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        if (Physics.Raycast(ray, out RaycastHit hit, 100.0f))
+        Debug.DrawRay(ray.origin, ray.origin+ray.direction*1000, Color.red, 3);
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f))
         {
-            EnemyController enemy = hit.collider.GetComponent<EnemyController>();
-
-            if (enemy != null) { 
+            EnemyController enemy = hit.collider.GetComponentInParent<EnemyController>();
+            Debug.Log(hit.collider.gameObject.name);
+            if (enemy != null) {
+                Debug.Log(enemy.EnemySO.Name);
                 enemy.HealthController.TakeDamage(weapon.damage);
             }
+            else { Debug.Log($"Попадание в объект (не враг): {hit.collider.name}"); }
+            
         }
 
     }

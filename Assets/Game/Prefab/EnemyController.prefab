@@ -74,7 +74,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2e6f20314a96649afa322cbdffccfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Enemy
-  _meshParent: {fileID: 2522140743914667484}
   _enemySO: {fileID: 0}
 --- !u!114 &1558370068059199833
 MonoBehaviour:
@@ -88,9 +87,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4600c8a66555acd47876eda1b7fd1b0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.NewEnemyActionController
-  _model: {fileID: 2522140743914667484}
+  VisualModel: {fileID: 2522140743914667484}
   _groundProbe: {fileID: 375385901788228178}
-  _groundDistance: 1
+  _groundDistance: 1.1
   SquashEnabled: 0
   squashOnJump: 0.05
   squashOnLandMin: 0.05
@@ -99,7 +98,7 @@ MonoBehaviour:
   landSpeedMax: 25
   springStiffness: 121.9
   springDamping: 10.44
-  SuspensionEnabled: 0
+  SuspensionEnabled: 1
   rideHeight: 1
   springStrength: 120
   springDamper: 25
@@ -123,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GroundProbe
   probeOrigin: {fileID: 5234340105504091051}
   probeRadius: 0.25
-  probeLength: 2
+  probeLength: 3
   groundMask:
     serializedVersion: 2
     m_Bits: 8

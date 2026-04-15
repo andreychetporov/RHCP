@@ -1,5 +1,3 @@
-using System.Numerics;
-
 public interface IPlayerInput
 {
     float MoveX { get; }

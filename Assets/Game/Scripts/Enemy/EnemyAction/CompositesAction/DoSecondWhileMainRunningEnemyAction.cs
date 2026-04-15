@@ -48,7 +48,6 @@ namespace Game.Enemy.Action
             }
             else
             {
-                _secondAction.Exit(owner);
                 Status = _mainAction.Status;
             }
         }
