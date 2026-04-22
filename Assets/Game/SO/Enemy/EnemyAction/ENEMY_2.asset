@@ -38,7 +38,7 @@ MonoBehaviour:
     - rid: 6617142742666707031
       type: {class: SetCollisionLayerEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _detectCollisions: 0
+        _detectCollisions: 1
         _includeLayers:
           serializedVersion: 2
           m_Bits: 0

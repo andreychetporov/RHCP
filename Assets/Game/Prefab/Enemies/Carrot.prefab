@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4970989848755135003, guid: 42553c149189b6e4da2765ce5484d9be, type: 3}
+    - target: {fileID: 4468643094837670096, guid: 23d4189aa8c90244fbee6d948326cd55, type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4468643094837670096, guid: 23d4189aa8c90244fbee6d948326cd55, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6171595142731031489, guid: 23d4189aa8c90244fbee6d948326cd55, type: 3}
       propertyPath: m_Mesh
       value: 
