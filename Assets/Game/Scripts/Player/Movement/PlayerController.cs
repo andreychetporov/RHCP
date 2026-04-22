@@ -58,16 +58,14 @@ public class PlayerController : MonoBehaviour
         hud.transform.localScale = new Vector3(weapon.damageRadius, weapon.damageRadius, 0.0f);
         slice.SetWeapon(newWeapon);
     }
+
     private void FixedUpdate()
     {
         float dt = Time.fixedDeltaTime;
 
-        float moveX = _input.MoveX;
         bool jumpPressed = _input.JumpPressed;
         bool jumpReleased = _input.JumpReleased;
         bool jumpHeld = _input.JumpHeld;
-        bool dashPressed = _input.DashPressed;
-        bool crouchHeld = _input.CrouchHeld;
 
         if (jumpPressed)
             _input.ConsumeJumpPressed();
@@ -75,17 +73,12 @@ public class PlayerController : MonoBehaviour
         if (jumpReleased)
             _input.ConsumeJumpReleased();
 
-        if (dashPressed)
-            _input.ConsumeDashPressed();
-
         groundProbe.TickProbe();
         hoverSuspension.TickSuspension();
 
-        if (dashPressed)
-            movementMotor.TryDash(moveX, crouchHeld);
-
         jumpMotor.TickJump(jumpPressed, jumpReleased, jumpHeld, dt);
-        movementMotor.TickMove(moveX, crouchHeld, dt);
+
+        movementMotor.TickMove(dt);
 
         RotateCharacter();
     }
@@ -136,5 +129,4 @@ public class PlayerController : MonoBehaviour
             rotationSpeed * Time.fixedDeltaTime
         );
     }
-
 }
