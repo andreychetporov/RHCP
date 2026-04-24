@@ -1,17 +1,28 @@
+using Game.Enemy.Slice;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Level
 {
     public class LevelBootstrap : MonoBehaviour
     {
-        [Header("Reference")]
-        [SerializeField] private Transform _player;
-
         public static LevelBootstrap Instance { get; private set; }
 
+        private PlayerController _playerController;
+        public Transform GetPlayerTransform
+        {
+            get
+            {
+                if (_playerController == null)
+                {
+                    _playerController = FindAnyObjectByType<PlayerController>();
+                }
 
+                return _playerController.transform;
+            }
+        }
 
-        public Vector3 GetPlayerPosition => _player.transform.position;
+        [Inject] public IEnemySliceFactory EnemySliceFactory { get; private set; }
 
         public void Awake()
         {

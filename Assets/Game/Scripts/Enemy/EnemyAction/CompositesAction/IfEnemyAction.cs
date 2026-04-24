@@ -25,8 +25,6 @@ namespace Game.Enemy.Action
         {
             bool result = _condition.Evaluate(owner);
 
-            Debug.Log(result);
-
             EnemyAction desiredAction = result ? _trueAction : _falseAction;
 
             if (_currentAction != desiredAction)

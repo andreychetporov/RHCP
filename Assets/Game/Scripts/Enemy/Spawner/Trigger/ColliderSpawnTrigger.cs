@@ -31,7 +31,7 @@ namespace Game.Enemy.Spawner
             }
         }
 
-        public bool CanTrigger() => (LevelBootstrap.Instance.GetPlayerPosition - transform.position).sqrMagnitude >= (_externSpawnValidation * _externSpawnValidation);
+        public bool CanTrigger() => (LevelBootstrap.Instance.GetPlayerTransform.position - transform.position).sqrMagnitude >= (_externSpawnValidation * _externSpawnValidation);
 
 #if UNITY_EDITOR
         public void OnDrawGizmos()

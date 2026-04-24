@@ -1,6 +1,10 @@
 using Game.Enemy.Action;
+using Game.Enemy.Slice;
+using Game.Level;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Enemy
 {
@@ -9,14 +13,17 @@ namespace Game.Enemy
     {
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
-        private MeshRenderer[] meshRenderer;
-
         [SerializeField] private AudioClip clip;
+
         public BaseEnemyActionController ActionController { get; protected set; }
 
         public HealthPointController HealthController { get; protected set; }
 
         public EnemySO EnemySO { get; protected set; }
+
+        [Inject] private IEnemySliceFactory _sliceFactory;
+
+        private Transform _visualModel;
 
         private void Awake()
         {
@@ -27,8 +34,6 @@ namespace Game.Enemy
 
         public void Initialize(EnemySO enemySO)
         {
-
-
             EnemySO = enemySO;
    
             ActionController.Initialize(EnemySO.Behavior);
@@ -43,14 +48,15 @@ namespace Game.Enemy
 
         private void HealthController_OnDeath()
         {
+            if (_visualModel == null) { _visualModel = GetComponentInChildren<MeshRenderer>().transform; }
+            LevelBootstrap.Instance.EnemySliceFactory.SpawnSlicedParts(_visualModel, ActionController.TargetVelocity, transform.position, transform.forward);
+
             gameObject.SetActive(false);
         }
 
-        private void HealthOnValueChanged(int arg1, int arg2)
+        private void HealthOnValueChanged(int oldValue, int newValue)
         {
             if (HealthController.IsDead) { return; }
-
-            //AudioSource.PlayClipAtPoint(clip, transform.position); временно закомментил
         }
 
         private void SetupModel()
@@ -62,7 +68,7 @@ namespace Game.Enemy
                 Destroy(ActionController.VisualModel.GetChild(i).gameObject);
             }
 
-            Instantiate(EnemySO.ModelPrefab, ActionController.VisualModel);
+            _visualModel = Instantiate(EnemySO.ModelPrefab, ActionController.VisualModel);
         }
 
 #if UNITY_EDITOR

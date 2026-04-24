@@ -15,7 +15,7 @@ namespace Game.Enemy.Action
 
             if (LevelBootstrap.Instance == null) { return false; }
 
-            Vector3 local = owner.transform.InverseTransformPoint(LevelBootstrap.Instance.GetPlayerPosition);
+            Vector3 local = owner.transform.InverseTransformPoint(LevelBootstrap.Instance.GetPlayerTransform.position);
 
             return Mathf.Abs(local.x) <= _boxExtent.x &&
                    Mathf.Abs(local.y) <= _boxExtent.y &&
