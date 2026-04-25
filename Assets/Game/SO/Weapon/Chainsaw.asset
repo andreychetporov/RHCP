@@ -15,6 +15,6 @@ MonoBehaviour:
   weaponName: 
   model: {fileID: 0}
   trailMaterial: {fileID: 2100000, guid: c78b5dacb6e1a8343bb1dfe2c4161830, type: 2}
-  damage: 30
+  damage: 1
   audioClip: {fileID: 0}
   damageRadius: 9

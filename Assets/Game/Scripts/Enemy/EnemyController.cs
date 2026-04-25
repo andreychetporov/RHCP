@@ -1,7 +1,7 @@
+using Game.Audio;
 using Game.Enemy.Action;
 using Game.Enemy.Slice;
 using Game.Level;
-using TMPro;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
@@ -13,7 +13,6 @@ namespace Game.Enemy
     {
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
-        [SerializeField] private AudioClip clip;
 
         public BaseEnemyActionController ActionController { get; protected set; }
 
@@ -49,7 +48,11 @@ namespace Game.Enemy
         private void HealthController_OnDeath()
         {
             if (_visualModel == null) { _visualModel = GetComponentInChildren<MeshRenderer>().transform; }
-            LevelBootstrap.Instance.EnemySliceFactory.SpawnSlicedParts(_visualModel, ActionController.TargetVelocity, transform.position, transform.forward);
+
+            LevelBootstrap.Instance.EnemySliceFactory.SpawnSlicedParts(_visualModel, EnemySO.MainColor, ActionController.TargetVelocity, transform.position, transform.forward);
+
+            SoundManager.Instance.Get().Initialize(EnemySO.DeathSFX).Play();
+            SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
 
             gameObject.SetActive(false);
         }
@@ -57,6 +60,11 @@ namespace Game.Enemy
         private void HealthOnValueChanged(int oldValue, int newValue)
         {
             if (HealthController.IsDead) { return; }
+
+            if (newValue < oldValue)
+            {
+                SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
+            }
         }
 
         private void SetupModel()

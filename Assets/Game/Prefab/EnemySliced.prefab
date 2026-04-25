@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 137130408524447617}
   - component: {fileID: 1040772546036958922}
   - component: {fileID: 8225724512395899374}
+  - component: {fileID: -436848984557543740}
   - component: {fileID: 4570914170593661513}
   m_Layer: 0
   m_Name: EnemySliced
@@ -42,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3412082001348095650}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -1340541719380434750, guid: f58e122f95f9fda4c80da1e95a2f7883, type: 3}
 --- !u!23 &1040772546036958922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68,7 +69,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 4891645606513695757, guid: f58e122f95f9fda4c80da1e95a2f7883, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,7 +112,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -119,6 +120,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!64 &-436848984557543740
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3412082001348095650}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 503
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1340541719380434750, guid: f58e122f95f9fda4c80da1e95a2f7883, type: 3}
 --- !u!114 &4570914170593661513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,4 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d282a818fd19054a829feabc0c38a4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Slice.EnemySliced
+  _bloodParticle: {fileID: 7649620252721386138, guid: 877f86b7916089049ad0726901a434f5, type: 3}
   _lifeTime: 5
+  _expoledForce: 5

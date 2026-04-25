@@ -17,6 +17,17 @@ MonoBehaviour:
     \u0437\u0430\u043B\u0443\u043F\u0430"
   Icon: {fileID: 0}
   ModelPrefab: {fileID: 6750119071894398336, guid: 94974d831a6fb5d4998ff3e7da77aca9, type: 3}
+  MainColor: {r: 0.745283, g: 0.25663045, b: 0.25663045, a: 1}
+  TakeDamageSFX:
+    AudioResource: {fileID: 6418180475301049370, guid: b838221644e41734483be2066099cd3c, type: 2}
+    AudioMixerGroup: {fileID: 0}
+    IsLooping: 0
+    PlayOnAwake: 0
+  DeathSFX:
+    AudioResource: {fileID: 6418180475301049370, guid: db003c5433390db41b5f6c98f0a58c3e, type: 2}
+    AudioMixerGroup: {fileID: 0}
+    IsLooping: 0
+    PlayOnAwake: 0
   Behavior: {fileID: 11400000, guid: a22c41719da7c544da2313f329439431, type: 2}
   Characteristics:
     Damage: 1

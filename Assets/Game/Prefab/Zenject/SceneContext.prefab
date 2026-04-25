@@ -93,3 +93,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PrefabInstaller
   _enemyControllerPrefab: {fileID: 8624876400406640263, guid: 312d4a673b21ce54abb4b919f02b6adf, type: 3}
   _slicedEnemyPrefab: {fileID: 4570914170593661513, guid: 31b16233b6b7ca84c85b34416591df98, type: 3}
+  _soundEmitterPrefab: {fileID: 5401172264037176961, guid: 04f7c722bc0a0654e8bc16090064d83b, type: 3}

@@ -1,3 +1,4 @@
+using Game.Audio;
 using Game.Enemy.Action;
 using UnityEngine;
 
@@ -21,6 +22,11 @@ namespace Game.Enemy
 
         public Sprite Icon;
         public Transform ModelPrefab;
+
+        [Space()]
+        public Color MainColor;
+        public SoundData TakeDamageSFX;
+        public SoundData DeathSFX;
 
         [Header("Settings")]
         public EnemyActionBehaviorSO Behavior;

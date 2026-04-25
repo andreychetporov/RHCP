@@ -102,10 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2e6f20314a96649afa322cbdffccfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Enemy
-  _meshRenderer: {fileID: 0}
-  _meshFilter: {fileID: 0}
   _enemySO: {fileID: 0}
-  clip: {fileID: 0}
 --- !u!114 &1558370068059199833
 MonoBehaviour:
   m_ObjectHideFlags: 0

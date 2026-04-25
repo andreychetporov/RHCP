@@ -6,11 +6,24 @@ namespace Game.Enemy.Slice
 {
     public class EnemyScliceFactory : IEnemySliceFactory
     {
-        [Inject] private EnemySliced _prefab;
+        private EnemySliced _prefab;
 
         private List<EnemySliced> _pool = new List<EnemySliced>();
 
-        public void SpawnSlicedParts(Transform model, Vector3 velocity, Vector3 cutPoint, Vector3 cutNormal)
+        [Inject]
+        private void Initialize(EnemySliced prefab)
+        {
+            _prefab = prefab;
+
+            for (int i = 0; i < 20;  i++)
+            {
+                var go = GameObject.Instantiate(_prefab);
+                go.gameObject.SetActive(false);
+                _pool.Add(go);
+            }
+        }
+
+        public void SpawnSlicedParts(Transform model, Color mainColor, Vector3 velocity, Vector3 cutPoint, Vector3 cutNormal)
         {
             var meshFilter = model.GetComponent<MeshFilter>();
             var meshRenderer = model.GetComponent<MeshRenderer>();
@@ -22,19 +35,18 @@ namespace Game.Enemy.Slice
             MeshSlicer.PartMesh right = MeshSlicer.Slice(meshFilter.sharedMesh, localPlane, false);
 
             if (left.IsValid())
-                SpawnPart(model, meshRenderer, left, -cutNormal * IEnemySliceFactory.EXPLOED_FORCE + velocity);
-            if (right.IsValid())
-                SpawnPart(model, meshRenderer, right, cutNormal * IEnemySliceFactory.EXPLOED_FORCE + velocity);
+                SpawnPart(model, meshRenderer, left, mainColor, -cutNormal, velocity);
+            if (right.IsValid())                                          
+                SpawnPart(model, meshRenderer, right, mainColor, cutNormal, velocity);
         }
 
-        private void SpawnPart(Transform model, MeshRenderer meshRenderer, MeshSlicer.PartMesh part, Vector3 force)
+        private void SpawnPart(Transform model, MeshRenderer meshRenderer, MeshSlicer.PartMesh part, Color mainColor, Vector3 cutNormal, Vector3 baseVelocity)
         {
             EnemySliced sliced = GetPrefab();
-
             sliced.transform.SetPositionAndRotation(model.position, model.rotation);
-            sliced.transform.localScale = model.lossyScale;
+            sliced.transform.localScale = model.localScale;
 
-            sliced.Activate(part, meshRenderer.materials, force);
+            sliced.Activate(part, meshRenderer.sharedMaterials, mainColor, cutNormal, baseVelocity);
         }
 
         private EnemySliced GetPrefab()
