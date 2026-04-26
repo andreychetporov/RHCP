@@ -7,6 +7,7 @@ public class CoinsSpawner : MonoBehaviour
     [SerializeField] private float spreadAngle = 30.0f;
     [SerializeField] private float minForce = 2.0f;
     [SerializeField] private float maxForce = 3.0f;
+
     public void SpawnCoins(int coinsAmount)
     {
         for (int i = 0; i < coinsAmount; i++)
@@ -26,7 +27,6 @@ public class CoinsSpawner : MonoBehaviour
     }
     private Vector3 GetRandomDirection()
     {
-
         float angle = Random.Range(-spreadAngle / 2.0f, spreadAngle / 2.0f) * Mathf.Deg2Rad;
         return new Vector3(Mathf.Sin(angle), Mathf.Abs(Mathf.Cos(angle)) * heightMultiplayer, 0.0f);
     }

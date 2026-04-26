@@ -79,7 +79,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3782099472976622873}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 69242a1d11decd049a108c3112ca55da, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -234,7 +234,7 @@ MonoBehaviour:
   damageCooldown: 3
   _takeDamageSFX:
     AudioResource: {fileID: 6418180475301049370, guid: b838221644e41734483be2066099cd3c, type: 2}
-    AudioMixerGroup: {fileID: 0}
+    AudioMixerGroup: {fileID: 110151799328546220, guid: bf68861df2bd3f64f8454be7835cf594, type: 2}
     IsLooping: 0
     PlayOnAwake: 0
 --- !u!1 &3943844425052145861
@@ -369,7 +369,7 @@ GameObject:
   - component: {fileID: 1759116503505284760}
   - component: {fileID: 4137614139177004568}
   - component: {fileID: 7125437229841469634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CursorSlicer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,6 +525,9 @@ MonoBehaviour:
   _trail: {fileID: 4137614139177004568}
   _sliceLenght: 50
   _distanceFromCamera: 10
+  ignoreMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &8306241475470535659
 GameObject:
   m_ObjectHideFlags: 0
@@ -628,9 +631,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1493860351334811164}
     m_Modifications:
+    - target: {fileID: 3230406951584783081, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3663456983654631259, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 3663456983654631259, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6003669053639043180, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_Color.a

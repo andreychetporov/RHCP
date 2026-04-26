@@ -4,12 +4,7 @@ public class ContactDamage : MonoBehaviour
 {
     [SerializeField] private int damage = 1;
 
-    private void OnCollisionStay(Collision collision)
-    {
-        TryDamage(collision.collider);
-    }
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         TryDamage(other);
     }

@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 793703747507478476, guid: 23d4189aa8c90244fbee6d948326cd55, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 4468643094837670096, guid: 23d4189aa8c90244fbee6d948326cd55, type: 3}
       propertyPath: m_Mesh
       value: 

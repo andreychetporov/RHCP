@@ -8,7 +8,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using Zenject;
 
 namespace Game.Enemy
 {
@@ -17,11 +16,6 @@ namespace Game.Enemy
     {
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
-
-
-        private CoinsSpawner coinsSpawner; 
-        private MeshRenderer[] meshRenderer;
-
 
         [Header("Squash & Stretch")]
         [SerializeField] private float _punchScaleAmount = 0.3f;
@@ -39,10 +33,12 @@ namespace Game.Enemy
 
         private Tween _punchTween;
 
+        private CoinsSpawner _coinsSpawner;
+
         private void Awake()
         {
             ActionController = GetComponent<BaseEnemyActionController>();
-            coinsSpawner = GetComponent<CoinsSpawner>();
+            _coinsSpawner = GetComponent<CoinsSpawner>();
             if (_enemySO != null) { Initialize(_enemySO); }
         }
 
@@ -95,7 +91,7 @@ namespace Game.Enemy
             SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
 
 
-            coinsSpawner.SpawnCoins(20);
+            _coinsSpawner.SpawnCoins(20);
 
             gameObject.SetActive(false);
         }

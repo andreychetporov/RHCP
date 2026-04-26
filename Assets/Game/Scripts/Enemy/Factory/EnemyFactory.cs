@@ -52,6 +52,7 @@ namespace Game.Enemy
             }
 
             enemy.Initialize(enemySO);
+            enemy.gameObject.SetActive(true);
 
             Debug.Log($"Factory {enemy.gameObject}");
 
