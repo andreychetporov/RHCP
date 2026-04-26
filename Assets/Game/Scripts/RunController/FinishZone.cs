@@ -1,9 +1,10 @@
+using Game.Level;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class FinishZone : MonoBehaviour
 {
-    [SerializeField] private RunLevelController _runLevelController;
+    [Header("Settings")]
     [SerializeField] private string _playerTag = "Player";
     [SerializeField] private bool _requireStartedRun = true;
 
@@ -17,18 +18,10 @@ public class FinishZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag(_playerTag))
-            return;
+        if (!other.CompareTag(_playerTag)) { return; }
 
-        if (_runLevelController == null)
-        {
-            Debug.LogWarning("FinishZone: не назначен RunLevelController");
-            return;
-        }
+        if (_requireStartedRun && !LevelBootstrap.Instance.IsRunStarted) { return; }
 
-        if (_requireStartedRun && !_runLevelController.IsRunStarted)
-            return;
-
-        _runLevelController.FinishRun();
+        LevelBootstrap.Instance.FinishRun();
     }
 }

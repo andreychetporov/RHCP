@@ -71,7 +71,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!64 &7376726384408613728
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -113,10 +113,10 @@ MonoBehaviour:
   slice: {fileID: 7125437229841469634}
   model: {fileID: 5000181128236619164}
   rb: {fileID: 3367940369471197505}
+  hud: {fileID: 1442301453266490906}
   rotationSpeed: 15
   minRotateVelocity: 0.05
   modelForwardAxis: {x: 1, y: 0, z: 0}
-  hud: {fileID: 1442301453266490906}
   weapon: {fileID: 11400000, guid: 861c7fbe16c9e604ab707dc8f9204294, type: 2}
 --- !u!114 &6915905050585464490
 MonoBehaviour:
@@ -132,18 +132,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 3367940369471197505}
   groundProbe: {fileID: 3580948323691281400}
-  landingSquash: {fileID: 0}
   maxSpeed: 7
   acceleration: 30
   deceleration: 35
   airAccelerationMultiplier: 0.5
   maxAccelerationForce: 100
-  crouchSpeedMultiplier: 0.4
-  crouchAccelerationMultiplier: 0.5
-  dashSpeed: 16
-  dashAcceleration: 120
-  dashDuration: 0.15
-  dashCooldown: 0.6
 --- !u!114 &2468021223039313386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverSuspension
   rb: {fileID: 3367940369471197505}
   groundProbe: {fileID: 3580948323691281400}
-  rideHeight: 1.5
+  rideHeight: 0.8
   springStrength: 120
   springDamper: 25
   maxSpringForce: 200
@@ -176,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GroundProbe
   probeOrigin: {fileID: 680567500613276777}
   probeRadius: 0.25
-  probeLength: 2
+  probeLength: 1.2
   groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -239,6 +232,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Health
   maxHealth: 5
   damageCooldown: 3
+  _takeDamageSFX:
+    AudioResource: {fileID: 6418180475301049370, guid: b838221644e41734483be2066099cd3c, type: 2}
+    AudioMixerGroup: {fileID: 0}
+    IsLooping: 0
+    PlayOnAwake: 0
 --- !u!1 &3943844425052145861
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,9 +522,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ed9a7653c55d24d81c47a61a13ea5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CursorSlice
-  trail: {fileID: 4137614139177004568}
-  sliceLenght: 30
-  distanceFromCamera: 6
+  _trail: {fileID: 4137614139177004568}
+  _sliceLenght: 50
+  _distanceFromCamera: 10
 --- !u!1 &8306241475470535659
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +552,7 @@ Transform:
   m_GameObject: {fileID: 8306241475470535659}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000014582103, y: -0.00000008811338, z: -0.0000000010880756, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.75}
+  m_LocalPosition: {x: 0, y: 1.8875, z: -13.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -621,7 +619,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 0, z: -7}
+  FollowOffset: {x: 0, y: 1.51, z: -11}
 --- !u!1001 &5140090097111383670
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -633,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 3663456983654631259, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6003669053639043180, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
+      propertyPath: m_Color.a
+      value: 0.47058824
       objectReference: {fileID: 0}
     - target: {fileID: 6233008745112091793, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_Pivot.x
@@ -713,6 +715,10 @@ PrefabInstance:
     - target: {fileID: 6233008745112091793, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476766066127803472, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -150
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

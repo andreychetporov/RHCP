@@ -10,14 +10,19 @@ namespace Game.Enemy.Slice
 
         private List<EnemySliced> _pool = new List<EnemySliced>();
 
+        private Transform _container;
+
         [Inject]
         private void Initialize(EnemySliced prefab)
         {
             _prefab = prefab;
 
+            _container = new GameObject().transform;
+            _container.name = "CONTAINER_EnemyScliceFactory";
+
             for (int i = 0; i < 20;  i++)
             {
-                var go = GameObject.Instantiate(_prefab);
+                var go = GameObject.Instantiate(_prefab, _container);
                 go.gameObject.SetActive(false);
                 _pool.Add(go);
             }
@@ -59,7 +64,7 @@ namespace Game.Enemy.Slice
                 }
             }
 
-            return GameObject.Instantiate(_prefab);
+            return GameObject.Instantiate(_prefab, _container);
         }
     }
 }

@@ -10,7 +10,7 @@ public class PlayerHealthUI : MonoBehaviour
 
     private void Start()
     {
-        _playerHealth = LevelBootstrap.Instance.GetPlayerTransform.GetComponent<PlayerHealth>();
+        _playerHealth = LevelBootstrap.Instance.PlayerController.GetComponent<PlayerHealth>();
         _playerHealth.HealthChanged += PlayerHealth_HealthChanged;
     }
 

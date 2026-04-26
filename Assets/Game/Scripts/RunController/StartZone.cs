@@ -1,9 +1,10 @@
+using Game.Level;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class StartZone : MonoBehaviour
 {
-    [SerializeField] private RunLevelController _runLevelController;
+    [Header("Settings")]
     [SerializeField] private string _playerTag = "Player";
     [SerializeField] private bool _disableAfterStart = true;
 
@@ -17,20 +18,10 @@ public class StartZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag(_playerTag))
-            return;
+        if (!other.CompareTag(_playerTag)) { return; }
 
-        if (_runLevelController == null)
-        {
-            Debug.LogWarning("StartZone: не назначен RunLevelController");
-            return;
-        }
+        LevelBootstrap.Instance.StartRun();
 
-        _runLevelController.StartRun();
-
-        if (_disableAfterStart)
-        {
-            _collider.enabled = false;
-        }
+        if (_disableAfterStart) { _collider.enabled = false; }
     }
 }
