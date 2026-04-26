@@ -18,6 +18,11 @@ namespace Game.Enemy
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
 
+
+        private CoinsSpawner coinsSpawner; 
+        private MeshRenderer[] meshRenderer;
+
+
         [Header("Squash & Stretch")]
         [SerializeField] private float _punchScaleAmount = 0.3f;
         [SerializeField] private float _punchDuration = 0.35f;
@@ -37,7 +42,7 @@ namespace Game.Enemy
         private void Awake()
         {
             ActionController = GetComponent<BaseEnemyActionController>();
-
+            coinsSpawner = GetComponent<CoinsSpawner>();
             if (_enemySO != null) { Initialize(_enemySO); }
         }
 
@@ -81,12 +86,16 @@ namespace Game.Enemy
 
         private void HealthController_OnDeath()
         {
+
             if (_visualModel == null) { _visualModel = GetComponentInChildren<MeshRenderer>().transform; }
 
             LevelBootstrap.Instance.EnemySliceFactory.SpawnSlicedParts(_visualModel, EnemySO.MainColor, ActionController.TargetVelocity, transform.position, transform.forward);
 
             SoundManager.Instance.Get().Initialize(EnemySO.DeathSFX).Play();
             SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
+
+
+            coinsSpawner.SpawnCoins(20);
 
             gameObject.SetActive(false);
         }
