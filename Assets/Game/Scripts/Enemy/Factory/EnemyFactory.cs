@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
@@ -6,9 +7,27 @@ namespace Game.Enemy
 {
     public class EnemyFactory : IEnemyFactory
     {
-        [Inject] private readonly EnemyController _prefab;
+        private EnemyController _prefab;
 
         private List<EnemyController> _pool = new List<EnemyController>();
+
+        private Transform _container;
+
+        [Inject]
+        private void Initialize(EnemyController prefab)
+        {
+            _prefab = prefab;
+
+            _container = new GameObject().transform;
+            _container.name = "CONTAINER_EnemyFactory";
+
+            for (int i = 0; i < 10; i++)
+            {
+                var e = GameObject.Instantiate(_prefab, _container);
+                e.gameObject.SetActive(false);
+                _pool.Add(e);
+            }
+        }
 
         public EnemyController CreateEnemy(EnemySO enemySO, Transform spawnTransform)
         {
@@ -24,7 +43,7 @@ namespace Game.Enemy
 
             if (enemy == null)
             {
-                enemy = GameObject.Instantiate(_prefab, spawnTransform.position, spawnTransform.rotation);
+                enemy = GameObject.Instantiate(_prefab, spawnTransform.position, spawnTransform.rotation, _container);
             }
             else
             {
