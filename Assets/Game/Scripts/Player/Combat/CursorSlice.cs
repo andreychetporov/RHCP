@@ -6,9 +6,14 @@ using Game.Audio;
 [RequireComponent(typeof(TrailRenderer))]
 public class CursorSlice : MonoBehaviour
 {
+
     [SerializeField] private TrailRenderer _trail;
     [SerializeField] private float _sliceLenght = 100.0f;
     [SerializeField] private float _distanceFromCamera = 10.0f;
+
+    [SerializeField] private LayerMask ignoreMask;
+    private WeaponSO weapon;
+
 
     private WeaponSO _weapon;
 
@@ -45,7 +50,9 @@ public class CursorSlice : MonoBehaviour
     private void FindEnemy()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
         if (Physics.SphereCast(ray, 0.5f, out RaycastHit hit, 1000.0f))
+
         {
             EnemyController enemy = hit.collider.GetComponentInParent<EnemyController>();
             if (enemy != null)
