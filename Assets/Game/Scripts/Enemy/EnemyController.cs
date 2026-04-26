@@ -9,6 +9,7 @@ namespace Game.Enemy
     {
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
+        private CoinsSpawner coinsSpawner; 
         private MeshRenderer[] meshRenderer;
 
         [SerializeField] private AudioClip clip;
@@ -21,7 +22,7 @@ namespace Game.Enemy
         private void Awake()
         {
             ActionController = GetComponent<BaseEnemyActionController>();
-
+            coinsSpawner = GetComponent<CoinsSpawner>();
             if (_enemySO != null) { Initialize(_enemySO); }
         }
 
@@ -43,6 +44,7 @@ namespace Game.Enemy
 
         private void HealthController_OnDeath()
         {
+            coinsSpawner.SpawnCoins(20);
             gameObject.SetActive(false);
         }
 

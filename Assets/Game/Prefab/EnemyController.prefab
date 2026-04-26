@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8624876400406640263}
   - component: {fileID: 1558370068059199833}
   - component: {fileID: 375385901788228178}
+  - component: {fileID: 2889749126788710216}
+  - component: {fileID: -7453957138658804655}
   m_Layer: 7
   m_Name: EnemyController
   m_TagString: Untagged
@@ -75,6 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Enemy
   _enemySO: {fileID: 0}
+  clip: {fileID: 0}
 --- !u!114 &1558370068059199833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +129,50 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
+--- !u!54 &2889749126788710216
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425604299931270218}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-7453957138658804655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2425604299931270218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f31a98c4fb3de468ce71ada99f27bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinsSpawner
+  coinPrefab: {fileID: 6270318501102791319, guid: 67eaad70905c46746a9f343f4f9a8f00, type: 3}
+  heightMultiplayer: 1
+  spreadAngle: 5
+  minForce: 1
+  maxForce: 2
 --- !u!1 &4033604323465389493
 GameObject:
   m_ObjectHideFlags: 0

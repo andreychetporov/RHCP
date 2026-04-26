@@ -8,6 +8,7 @@ public class CursorSlice : MonoBehaviour
     [SerializeField] private TrailRenderer trail;
     [SerializeField] private float sliceLenght = 100.0f;
     [SerializeField] private float distanceFromCamera = 10f;
+    [SerializeField] private LayerMask ignoreMask;
     private WeaponSO weapon;
 
     private Vector2 previousMSP; //MSP - mouse screen pos
@@ -47,7 +48,7 @@ public class CursorSlice : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         Debug.DrawRay(ray.origin, ray.origin+ray.direction*1000, Color.red, 3);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f, ~ignoreMask))
         {
             EnemyController enemy = hit.collider.GetComponentInParent<EnemyController>();
             Debug.Log(hit.collider.gameObject.name);
