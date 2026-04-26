@@ -29,7 +29,7 @@ namespace Game.Audio
             }
             else
             {
-                Destroy(this);
+                Destroy(gameObject);
                 return;
             }
 

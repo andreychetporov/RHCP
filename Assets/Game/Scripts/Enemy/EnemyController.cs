@@ -1,7 +1,11 @@
+﻿using DG.Tweening;
 using Game.Audio;
+using Game.Blood;
 using Game.Enemy.Action;
 using Game.Enemy.Slice;
 using Game.Level;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Zenject;
@@ -14,15 +18,21 @@ namespace Game.Enemy
         [Header("Settings")]
         [SerializeField] private EnemySO _enemySO;
 
+        [Header("Squash & Stretch")]
+        [SerializeField] private float _punchScaleAmount = 0.3f;
+        [SerializeField] private float _punchDuration = 0.35f;
+        [SerializeField] private int _punchVibrato = 6;
+        [SerializeField] private float _punchElasticity = 0.5f;
+
         public BaseEnemyActionController ActionController { get; protected set; }
 
         public HealthPointController HealthController { get; protected set; }
 
         public EnemySO EnemySO { get; protected set; }
 
-        [Inject] private IEnemySliceFactory _sliceFactory;
-
         private Transform _visualModel;
+
+        private Tween _punchTween;
 
         private void Awake()
         {
@@ -34,7 +44,7 @@ namespace Game.Enemy
         public void Initialize(EnemySO enemySO)
         {
             EnemySO = enemySO;
-   
+
             ActionController.Initialize(EnemySO.Behavior);
             HealthController = new HealthPointController(EnemySO.Characteristics.Health);
 
@@ -43,6 +53,30 @@ namespace Game.Enemy
             gameObject.name = $"Enemy_{EnemySO.Name}";
             HealthController.Health.OnValueChanged += HealthOnValueChanged;
             HealthController.OnDeath += HealthController_OnDeath;
+        }
+
+        public void PlayHit()
+        {
+            SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
+            BloodManager.Instance.GetForDamage().Initialize(transform.position, EnemySO.MainColor).Play();
+            BloodCanvas.Instance.SpawnBloodSpot(EnemySO.MainColor);
+
+            PlayPunch();
+        }
+
+        private void PlayPunch()
+        {
+            _punchTween?.Kill(complete: true);
+
+            Vector3 punch = new Vector3(
+                -_punchScaleAmount,
+                 _punchScaleAmount,
+                -_punchScaleAmount
+            );
+
+            _punchTween = transform
+                .DOPunchScale(punch, _punchDuration, _punchVibrato, _punchElasticity)
+                .SetEase(Ease.OutQuad);
         }
 
         private void HealthController_OnDeath()
@@ -61,10 +95,7 @@ namespace Game.Enemy
         {
             if (HealthController.IsDead) { return; }
 
-            if (newValue < oldValue)
-            {
-                SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
-            }
+            if (newValue < oldValue) { PlayHit(); }
         }
 
         private void SetupModel()
@@ -73,10 +104,15 @@ namespace Game.Enemy
 
             for (int i = ActionController.VisualModel.childCount - 1; i >= 0; i--)
             {
-                Destroy(ActionController.VisualModel.GetChild(i).gameObject);
+                DestroyImmediate(ActionController.VisualModel.GetChild(i).gameObject);
             }
 
             _visualModel = Instantiate(EnemySO.ModelPrefab, ActionController.VisualModel);
+        }
+
+        private void OnDestroy()
+        {
+            _punchTween?.Kill();
         }
 
 #if UNITY_EDITOR

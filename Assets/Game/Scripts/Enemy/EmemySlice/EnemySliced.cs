@@ -1,3 +1,4 @@
+using Game.Blood;
 using System.Collections;
 using UnityEngine;
 
@@ -7,9 +8,6 @@ namespace Game.Enemy.Slice
     [RequireComponent(typeof(MeshCollider))]
     public class EnemySliced : MonoBehaviour
     {
-        [Header("Reference")]
-        [SerializeField] private ParticleSystem _bloodParticle;
-
         [Header("Settings")]
         [SerializeField] private float _lifeTime = 5.0f;
         [SerializeField] private float _expoledForce = 5.0f;
@@ -19,8 +17,6 @@ namespace Game.Enemy.Slice
         private MeshRenderer _mr;
         private MeshCollider _mc;
 
-        private ParticleSystem _particle;
-
         private Coroutine _lifeTimeCor;
 
         private void Awake()
@@ -29,9 +25,6 @@ namespace Game.Enemy.Slice
             _mf = GetComponent<MeshFilter>();
             _mr = GetComponent<MeshRenderer>();
             _mc = GetComponent<MeshCollider>();
-
-            _particle = Instantiate(_bloodParticle, transform);
-            _particle.Stop();
         }
 
         public void Activate(MeshSlicer.PartMesh part, Material[] materials, Color mainColor, Vector3 cutNormal, Vector3 baseVelocity)
@@ -54,15 +47,8 @@ namespace Game.Enemy.Slice
                 _rb.AddTorque(Random.onUnitSphere * 0.1f, ForceMode.Impulse);
             }
 
-            _particle.gameObject.SetActive(true);
             {
-                _particle.transform.position = transform.position;
-                _particle.Clear(true);
-
-                var main = _particle.main;
-                main.startColor = mainColor;
-
-                _particle.Play(true);
+                BloodManager.Instance.GetForDeath().Initialize(transform.position, mainColor).Play();
             }
 
             _lifeTimeCor = StartCoroutine(LifeCur());
@@ -72,11 +58,6 @@ namespace Game.Enemy.Slice
         {
             yield return new WaitForSeconds(_lifeTime);
 
-            _particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-
-            yield return new WaitWhile(() => _particle.particleCount > 0);
-
-            _particle.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }

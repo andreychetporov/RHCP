@@ -30,4 +30,4 @@ MonoBehaviour:
   Behavior: {fileID: 11400000, guid: 920283a2eb04b2c4492ed41ab3298643, type: 2}
   Characteristics:
     Damage: 1
-    Health: 1
+    Health: 5

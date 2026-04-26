@@ -1,22 +1,29 @@
+using Game;
+using Game.Audio;
+using Game.Blood;
+using Game.Enemy;
 using System;
 using UnityEngine;
-using Game;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 5;
-    [SerializeField] private float damageCooldown = 0.5f;
-
-    private HealthPointController _health;
-    private float _damageTimer;
-
     public event Action<int, int> HealthChanged;
     public event Action Died;
 
+    [Header("Settings")]
+    [SerializeField] private int maxHealth = 5;
+    [SerializeField] private float damageCooldown = 0.5f;
+
+    [Header("Effects")]
+    [SerializeField] private SoundData _takeDamageSFX;
+    
     public HealthPointController Controller => _health;
     public int CurrentHealth => _health != null ? _health.Health.Value : 0;
     public int MaxHealth => _health != null ? _health.MaxHealth : maxHealth;
     public bool CanTakeDamage => _damageTimer <= 0f;
+
+    private HealthPointController _health;
+    private float _damageTimer;
 
     private void Awake()
     {
@@ -34,7 +41,9 @@ public class PlayerHealth : MonoBehaviour
     private void Update()
     {
         if (_damageTimer > 0f)
+        {
             _damageTimer -= Time.deltaTime;
+        }
     }
 
     private void OnDestroy()
@@ -50,40 +59,35 @@ public class PlayerHealth : MonoBehaviour
     private void OnHealthChanged(int oldValue, int newValue)
     {
         Debug.Log($"HP: {newValue}/{_health.MaxHealth}");
+
+        if (newValue < oldValue && newValue > 0)
+        {
+            _damageTimer = damageCooldown;
+
+            SoundManager.Instance.Get().Initialize(_takeDamageSFX).Play();
+            BloodManager.Instance.GetForDamage().Initialize(transform.position, Color.red).Play();
+            BloodCanvas.Instance.SpawnBloodSpot(Color.red);
+        }
+
         HealthChanged?.Invoke(newValue, MaxHealth);
     }
 
     private void OnDeath()
     {
         Debug.Log("Player died");
-        Died?.Invoke();
 
-        PlayerController controller = GetComponent<PlayerController>();
-        if (controller != null)
-            controller.enabled = false;
+        SoundManager.Instance.Get().Initialize(_takeDamageSFX).Play();
+        BloodManager.Instance.GetForDeath().Initialize(transform.position, Color.red).Play();
+
+        Died?.Invoke();
     }
 
     public void TakeDamage(int damage)
     {
-        if (_health == null)
-            return;
+        if (_damageTimer > 0.0f) { return; }
 
-        if (_damageTimer > 0f)
-            return;
-
-        int oldHealth = _health.Health.Value;
-
-        _health.TakeDamage(damage);
-
-        if (_health.Health.Value < oldHealth)
-            _damageTimer = damageCooldown;
+        _health?.TakeDamage(damage);
     }
 
-    public void Heal(int amount)
-    {
-        if (_health == null)
-            return;
-
-        _health.TakeHeal(amount);
-    }
+    public void Heal(int amount) => _health?.TakeHeal(amount);
 }

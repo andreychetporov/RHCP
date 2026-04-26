@@ -103,6 +103,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Enemy
   _enemySO: {fileID: 0}
+  _punchScaleAmount: 0.3
+  _punchDuration: 0.35
+  _punchVibrato: 6
+  _punchElasticity: 0.5
+  _flashColor: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
+  _flashDuration: 0.01
+  _flashCount: 1
 --- !u!114 &1558370068059199833
 MonoBehaviour:
   m_ObjectHideFlags: 0

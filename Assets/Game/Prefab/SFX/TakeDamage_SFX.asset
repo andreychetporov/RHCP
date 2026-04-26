@@ -6,7 +6,7 @@ AudioRandomContainer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Hit_SFX
+  m_Name: TakeDamage_SFX
   m_Volume: 0
   m_Pitch: 0
   m_AutomaticTriggerTime: 0

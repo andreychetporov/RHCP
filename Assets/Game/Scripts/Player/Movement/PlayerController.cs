@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform model;
     [SerializeField] private Rigidbody rb;
 
+    [Header("UI Reference")]
+    [SerializeField] private Image hud;
+
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 15f;
     [SerializeField] private float minRotateVelocity = 0.05f;
     [SerializeField] private Vector3 modelForwardAxis = Vector3.right;
 
-    [SerializeField] private Image hud;
     [SerializeField] private WeaponSO weapon;
 
     [Inject] private IPlayerInput _input;
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
     public void EquipWeapon(WeaponSO newWeapon)
     {
         weapon = newWeapon;
-        hud.transform.localScale = new Vector3(weapon.damageRadius, weapon.damageRadius, 0.0f);
+        hud.transform.localScale = new Vector3(weapon.DamageRadius, weapon.DamageRadius, 0.0f);
         slice.SetWeapon(newWeapon);
     }
 

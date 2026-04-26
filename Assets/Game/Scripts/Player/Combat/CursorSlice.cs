@@ -1,43 +1,42 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Enemy;
+using Game.Audio;
 
 [RequireComponent(typeof(TrailRenderer))]
 public class CursorSlice : MonoBehaviour
 {
-    [SerializeField] private TrailRenderer trail;
-    [SerializeField] private float sliceLenght = 100.0f;
-    [SerializeField] private float distanceFromCamera = 10f;
-    private WeaponSO weapon;
+    [SerializeField] private TrailRenderer _trail;
+    [SerializeField] private float _sliceLenght = 100.0f;
+    [SerializeField] private float _distanceFromCamera = 10.0f;
 
-    private Vector2 previousMSP; //MSP - mouse screen pos
-    private Vector2 currentMSP; 
+    private WeaponSO _weapon;
+
+    private Vector2 _previousMSP;
 
     private void Awake()
     {
-        if (trail == null)
-            trail = GetComponent<TrailRenderer>();
-        trail.emitting = false;
+        if (_trail == null) { _trail = GetComponent<TrailRenderer>(); }
+        _trail.emitting = false;
     }
 
-    public void SetEmitting(bool isEmitting)
-    {
+    public void SetEmitting(bool isEmitting) => _trail.emitting = isEmitting;
 
-        trail.emitting = isEmitting;
-    }
     public void SetWeapon(WeaponSO newWeapon)
     {
-        weapon = newWeapon;
-        trail.material = weapon.trailMaterial;
+        _weapon = newWeapon;
+        _trail.material = _weapon.TrailMaterial;
     }
+
     public void UpdateSlice()
     {
-        currentMSP = Mouse.current.position.ReadValue();
+        Vector2 currentMSP = Mouse.current.position.ReadValue();
         
-        if (Vector2.Distance(previousMSP, currentMSP) > sliceLenght) 
+        if (Vector2.Distance(_previousMSP, currentMSP) > _sliceLenght) 
         {
+            Debug.Log("FIND");
             FindEnemy();
-            previousMSP = currentMSP;
+            _previousMSP = currentMSP;
         }
 
         transform.position = GetMouseWorldPos();
@@ -46,32 +45,29 @@ public class CursorSlice : MonoBehaviour
     private void FindEnemy()
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        Debug.DrawRay(ray.origin, ray.origin+ray.direction*1000, Color.red, 3);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000.0f))
+        if (Physics.SphereCast(ray, 0.5f, out RaycastHit hit, 1000.0f))
         {
             EnemyController enemy = hit.collider.GetComponentInParent<EnemyController>();
-            Debug.Log(hit.collider.gameObject.name);
-            if (enemy != null) {
+            if (enemy != null)
+            {
                 Debug.Log(enemy.EnemySO.Name);
-                enemy.HealthController.TakeDamage(weapon.damage);
+                enemy.HealthController.TakeDamage(_weapon.Damage);
+                SoundManager.Instance.Get().Initialize(_weapon.HitSound).Play();
             }
-            else { Debug.Log($"Попадание в объект (не враг): {hit.collider.name}"); }
-            
         }
-
     }
 
     private Vector3 GetMouseWorldPos()
     {
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-        return Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, distanceFromCamera));
+        return Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPos.x, mouseScreenPos.y, _distanceFromCamera));
     }
 
     public void Reset()
     {
         transform.position = GetMouseWorldPos();
-        trail.Clear();
-        previousMSP = Mouse.current.position.ReadValue();
+        _trail.Clear();
+        _previousMSP = Mouse.current.position.ReadValue();
     }
 
 }
