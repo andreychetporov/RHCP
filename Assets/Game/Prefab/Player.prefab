@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 3367940369471197505}
   groundProbe: {fileID: 3580948323691281400}
-  maxSpeed: 7
+  maxSpeed: 4
   acceleration: 30
   deceleration: 35
   airAccelerationMultiplier: 0.5
