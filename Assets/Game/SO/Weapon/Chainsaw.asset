@@ -22,6 +22,6 @@ MonoBehaviour:
     AudioMixerGroup: {fileID: 110151799328546220, guid: bf68861df2bd3f64f8454be7835cf594, type: 2}
     IsLooping: 0
     PlayOnAwake: 0
-  Damage: 1000
-  DamageRadius: 10
+  Damage: 1
+  DamageRadius: 100
   Price: 100

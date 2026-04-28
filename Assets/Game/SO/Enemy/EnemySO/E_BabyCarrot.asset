@@ -18,18 +18,18 @@ MonoBehaviour:
   ModelPrefab: {fileID: 6750119071894398336, guid: 31382b2758a7f0e40af94d51846d1e86, type: 3}
   MainColor: {r: 0.90943396, g: 0.4925098, b: 0.087511554, a: 0}
   TakeDamageSFX:
-    AudioResource: {fileID: 0}
-    AudioMixerGroup: {fileID: 0}
+    AudioResource: {fileID: 6418180475301049370, guid: b838221644e41734483be2066099cd3c, type: 2}
+    AudioMixerGroup: {fileID: 110151799328546220, guid: bf68861df2bd3f64f8454be7835cf594, type: 2}
     IsLooping: 0
     PlayOnAwake: 0
   DeathSFX:
-    AudioResource: {fileID: 0}
-    AudioMixerGroup: {fileID: 0}
+    AudioResource: {fileID: 6418180475301049370, guid: db003c5433390db41b5f6c98f0a58c3e, type: 2}
+    AudioMixerGroup: {fileID: 110151799328546220, guid: bf68861df2bd3f64f8454be7835cf594, type: 2}
     IsLooping: 0
     PlayOnAwake: 0
-  Behavior: {fileID: 0}
+  Behavior: {fileID: 11400000, guid: ef2f15fa8e892554fb387873380bf5c9, type: 2}
   Characteristics:
     Damage: 1
     Health: 1
-  coinsAmont: 5
-  ultaParticlesAmount: 2
+  coinsAmont: 0
+  ultaParticlesAmount: 0

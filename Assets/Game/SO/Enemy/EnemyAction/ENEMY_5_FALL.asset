@@ -13,13 +13,88 @@ MonoBehaviour:
   m_Name: ENEMY_5_FALL
   m_EditorClassIdentifier: Assembly-CSharp::Game.Enemy.Action.EnemyActionBehaviorSO
   RootAction:
-    rid: 9913826647736390
+    rid: 86177071696445793
   references:
     version: 2
     RefIds:
-    - rid: 9913826647736390
-      type: {class: MoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+    - rid: 86177071696445793
+      type: {class: SequenceEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
       data:
-        _movementSpeed: 5
-        _moveDirection: {x: 0, y: -1, z: 0}
-        _maxMoveDistance: 50
+        Children:
+        - rid: 86177071696445795
+        - rid: 86177071696445794
+        - rid: 86177071696445796
+    - rid: 86177071696445794
+      type: {class: SetCollisionLayerEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _detectCollisions: 1
+        _includeLayers:
+          serializedVersion: 2
+          m_Bits: 0
+        _excludeLayers:
+          serializedVersion: 2
+          m_Bits: 8
+    - rid: 86177071696445795
+      type: {class: SetGravityEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _gravityValue: 0
+    - rid: 86177071696445796
+      type: {class: RepeatEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _count: -1
+        Child:
+          rid: 86177071696445797
+    - rid: 86177071696445797
+      type: {class: CurveMoveEnemyAction, ns: Game.Enemy.Action, asm: Assembly-CSharp}
+      data:
+        _xCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _yCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: -1
+            outSlope: -1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: -1
+            inSlope: -1
+            outSlope: -1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        _xMultiplier: 10
+        _yMultiplier: 5
+        _moveSpeed: 10
