@@ -24,4 +24,4 @@ MonoBehaviour:
     PlayOnAwake: 0
   Damage: 1000
   DamageRadius: 10
-  Price: 0
+  Price: 100

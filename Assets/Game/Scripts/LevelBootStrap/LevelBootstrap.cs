@@ -37,16 +37,17 @@ namespace Game.Level
             }
             else
             {
-                Destroy(this);
+                Destroy(gameObject);
                 return;
             }
+            PlayerController = FindAnyObjectByType<PlayerController>();
+
+            if (PlayerController == null) { SpawnPlayer(); }
+
         }
 
         private void Start()
         {
-            PlayerController = FindAnyObjectByType<PlayerController>();
-
-            if (PlayerController == null) { SpawnPlayer(); }
         }
 
         private void Update()

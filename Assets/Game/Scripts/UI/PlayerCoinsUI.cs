@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class PlayerCoinsUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI coinsAmount;
+    [SerializeField] PlayerStatsSO playerStatsSO;
     private void Start()
     {
-        PlayerStatsSO playerStatsSO = GetComponentInParent<PlayerStatsSO>();
         playerStatsSO.Coins.OnValueChanged += OnCoinsAdded;
     }
 
