@@ -31,5 +31,9 @@ namespace Game.Enemy
         [Header("Settings")]
         public EnemyActionBehaviorSO Behavior;
         public EnemyCharacteristics Characteristics;
+
+        [Space()]
+        public int coinsAmont;
+        public int ultaParticlesAmount;
     }
 }

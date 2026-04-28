@@ -1,5 +1,6 @@
 using Game.Audio;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "WeaponSO", menuName = "Scriptable Objects/WeaponSO")]
 public class WeaponSO : ScriptableObject
@@ -9,7 +10,7 @@ public class WeaponSO : ScriptableObject
 
     [Space()]
 
-    public GameObject Model;
+    public Sprite Icon;
     public Material TrailMaterial;
     public SoundData HitSound;
 
@@ -17,4 +18,8 @@ public class WeaponSO : ScriptableObject
 
     public int Damage;
     public float DamageRadius;
+
+    [Space()]
+
+    public int Price;
 }

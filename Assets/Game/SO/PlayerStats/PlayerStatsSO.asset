@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70a7318e700b6e248ad467972635ea59, type: 3}
   m_Name: PlayerStatsSO
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsSO
+  availableWeapons:
+  - {fileID: 11400000, guid: 861c7fbe16c9e604ab707dc8f9204294, type: 2}
+  currentWeapon: {fileID: 11400000, guid: 861c7fbe16c9e604ab707dc8f9204294, type: 2}
