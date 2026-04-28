@@ -4,11 +4,11 @@ public class Collector : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Coin coin = other.GetComponent<Coin>();
-        coin = other.GetComponent<Coin>();
-        if (coin != null)
+        UltaParticle particle = other.GetComponent<UltaParticle>();
+        if (particle != null)
         {
-
+            particle.AddParticleEvent.Raise();
+            Destroy(particle.gameObject);
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Game.Enemy
         [SerializeField] private float _punchDuration = 0.35f;
         [SerializeField] private int _punchVibrato = 6;
         [SerializeField] private float _punchElasticity = 0.5f;
-
         public BaseEnemyActionController ActionController { get; protected set; }
 
         public HealthPointController HealthController { get; protected set; }
@@ -33,12 +32,10 @@ namespace Game.Enemy
 
         private Tween _punchTween;
 
-        private CoinsSpawner _coinsSpawner;
 
         private void Awake()
         {
             ActionController = GetComponent<BaseEnemyActionController>();
-            _coinsSpawner = GetComponent<CoinsSpawner>();
             if (_enemySO != null) { Initialize(_enemySO); }
         }
 
@@ -90,8 +87,8 @@ namespace Game.Enemy
             SoundManager.Instance.Get().Initialize(EnemySO.DeathSFX).Play();
             SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
 
-
-            _coinsSpawner.SpawnCoins(20);
+            CoinsManager.Instance.SpawnCoins(transform.position, EnemySO.coinsAmont);
+            ParticlesManager.Instance.SpawnParticles(transform.position, EnemySO.ultaParticlesAmount);
 
             gameObject.SetActive(false);
         }
