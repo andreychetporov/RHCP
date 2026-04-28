@@ -132,7 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rb: {fileID: 3367940369471197505}
   groundProbe: {fileID: 3580948323691281400}
-  maxSpeed: 4
+  maxSpeed: 7
   acceleration: 30
   deceleration: 35
   airAccelerationMultiplier: 0.5
@@ -726,14 +726,6 @@ PrefabInstance:
     - target: {fileID: 6233008745112091793, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7476766066127803472, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7476766066127803472, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7476766066127803472, guid: 7ff5764958826ed47b4b382d8aaec93c, type: 3}
       propertyPath: m_AnchoredPosition.y
