@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private HoverSuspension hoverSuspension;
     [SerializeField] private PlayerMovementMotor movementMotor;
     [SerializeField] private JumpMotor jumpMotor;
+    [SerializeField] private PlayerHealth health;
     [SerializeField] private CursorSlice slice;
     [SerializeField] private Transform model;
     [SerializeField] private Rigidbody rb;
@@ -22,7 +23,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float minRotateVelocity = 0.05f;
     [SerializeField] private Vector3 modelForwardAxis = Vector3.right;
 
-    [SerializeField] private WeaponSO weapon;
+    [Header("Stats")]
+    [SerializeField] private PlayerStatsSO statsSO;
+    private WeaponSO weapon;
 
     [Inject] private IPlayerInput _input;
 
@@ -51,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        EquipWeapon(weapon);
+        EquipWeapon(statsSO.currentWeapon);
     }
 
     public void EquipWeapon(WeaponSO newWeapon)

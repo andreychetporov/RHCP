@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8624876400406640263}
   - component: {fileID: 1558370068059199833}
   - component: {fileID: 375385901788228178}
-  - component: {fileID: 7578336625794676736}
   m_Layer: 7
   m_Name: EnemyController
   m_TagString: Untagged
@@ -133,23 +132,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &7578336625794676736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2425604299931270218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34f31a98c4fb3de468ce71ada99f27bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CoinsSpawner
-  coinPrefab: {fileID: 6270318501102791319, guid: 67eaad70905c46746a9f343f4f9a8f00, type: 3}
-  heightMultiplayer: 0
-  spreadAngle: 30
-  minForce: 2
-  maxForce: 3
 --- !u!1 &4033604323465389493
 GameObject:
   m_ObjectHideFlags: 0
