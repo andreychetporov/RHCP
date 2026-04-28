@@ -12,8 +12,13 @@ GameObject:
   - component: {fileID: 9118018488081725012}
   - component: {fileID: 7200252163197196218}
   - component: {fileID: 1409023693843948326}
+<<<<<<< Updated upstream
   - component: {fileID: 1132655329736433871}
   - component: {fileID: 596881524018150121}
+=======
+  - component: {fileID: 596881524018150121}
+  - component: {fileID: 4788452436640762320}
+>>>>>>> Stashed changes
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -114,6 +119,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream
 --- !u!114 &1132655329736433871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponProjectile
   lifeTime: 5
+=======
+>>>>>>> Stashed changes
 --- !u!54 &596881524018150121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +162,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+<<<<<<< Updated upstream
+=======
+--- !u!114 &4788452436640762320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8996811831520557212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dcd4a82db46bf6429b84c9b5a9719f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponProjectile
+  lifeTime: 5
+>>>>>>> Stashed changes
