@@ -61,6 +61,8 @@ QualitySettings:
     excludedTargetPlatforms:
     - Android
     - iPhone
+    - Server
+    - WebGL
   m_TextureMipmapLimitGroupNames: []
   m_PerPlatformDefaultQuality:
     Android: 0
