@@ -30,4 +30,6 @@ MonoBehaviour:
   Behavior: {fileID: 11400000, guid: ef2f15fa8e892554fb387873380bf5c9, type: 2}
   Characteristics:
     Damage: 1
-    Health: 2
+    Health: 1
+  coinsAmont: 0
+  ultaParticlesAmount: 0
