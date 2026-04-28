@@ -12,11 +12,14 @@ EditorBuildSettings:
     path: Assets/Game/Scene/MapLevel.unity
     guid: f75d479b75c966b46a26c525f120d3df
   - enabled: 1
+    path: Assets/Game/Scene/ShopScene.unity
+    guid: 630c29e13c42aac41a81507f5c083703
+  - enabled: 1
     path: Assets/Game/Scene/Level1Scene.unity
     guid: 397a788063412854ca3c2f91878f1e98
-  - enabled: 0
-    path: Assets/Game/Scene/LoadingScene.unity
-    guid: a7848754fdf93a44b86b29873dc88fe2
+  - enabled: 1
+    path: Assets/Game/Scene/Level2Scene.unity
+    guid: c3e47af70b99c2d42aa3f13e5d3569f4
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

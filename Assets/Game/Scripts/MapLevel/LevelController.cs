@@ -26,9 +26,7 @@ public class LevelController : MonoBehaviour
         if (Instance == null) Instance = this;
         else { Destroy(gameObject); return; }
 
-        //CurrentLevel = PlayerPrefs.HasKey(LEVEL_SAVE) ? PlayerPrefs.GetInt(LEVEL_SAVE) : 0;
-
-        
+        CurrentLevel = PlayerPrefs.HasKey(LEVEL_SAVE) ? PlayerPrefs.GetInt(LEVEL_SAVE) : 0;
     }
 
     private void Start()

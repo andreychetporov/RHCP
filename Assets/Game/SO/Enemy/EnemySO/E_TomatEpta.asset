@@ -32,3 +32,5 @@ MonoBehaviour:
   Characteristics:
     Damage: 1
     Health: 5
+  coinsAmont: 5
+  ultaParticlesAmount: 5

@@ -76,7 +76,7 @@ public class CoinsManager : MonoBehaviour
     }
     [SerializeField] private LayerMask groundLayer; 
 
-    public void SpawnCoins(Vector3 spawnPos,int coinsAmount)
+    public void SpawnCoins(Vector3 spawnPos, int coinsAmount)
     {
         float radius = 2.0f;
         float groundY = spawnPos.y; 

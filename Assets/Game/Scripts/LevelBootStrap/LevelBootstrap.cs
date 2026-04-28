@@ -1,6 +1,9 @@
+using DG.Tweening;
 using Game.Audio;
 using Game.Enemy.Slice;
+using Game.SceneLoaderSystem;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -19,6 +22,9 @@ namespace Game.Level
 
         [Header("Ambient")]
         [SerializeField] private SoundData _ambient;
+
+        [Header("DeathSound")]
+        [SerializeField] private SoundData _deathSound;
 
         public PlayerController PlayerController { get; private set; }
 
@@ -40,9 +46,25 @@ namespace Game.Level
                 Destroy(gameObject);
                 return;
             }
+
             PlayerController = FindAnyObjectByType<PlayerController>();
 
             if (PlayerController == null) { SpawnPlayer(); }
+
+            PlayerController.GetComponent<PlayerHealth>().Died += async () =>
+            {
+                PlayerController.GetComponent<PlayerMovementMotor>().enabled = false;
+
+                SoundManager.Instance.StopAllSound();
+
+                PlayerController.transform.DOScale(Vector3.one * 2.0f, 0.3f).SetEase(Ease.InOutSine).SetLoops(-1, LoopType.Yoyo);
+
+                SoundManager.Instance.Get().Initialize(_deathSound).Play();
+
+                await Task.Delay(1500);
+
+                SceneLoader.Instance.LoadScene(SceneEnum.MapLevel);
+            };
 
         }
 
@@ -91,6 +113,8 @@ namespace Game.Level
 
             Debug.Log($"Забег завершён. Время: {CurrentTime:F2} сек");
             OnRunFinished?.Invoke(CurrentTime);
+
+            SceneLoader.Instance.LoadScene(SceneEnum.MapLevel);
         }
 
         public void ResetRun()

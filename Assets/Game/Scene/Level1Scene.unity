@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34f31a98c4fb3de468ce71ada99f27bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CoinsManager
-  coinPrefab: {fileID: 0}
+  coinPrefab: {fileID: 8092049491985748947, guid: 3076ffb6efc612b4b809eda7e4d5b567, type: 3}
   spreadAngle: 30
   minForce: 2
   maxForce: 3

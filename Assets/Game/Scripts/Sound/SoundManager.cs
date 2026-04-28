@@ -19,7 +19,7 @@ namespace Game.Audio
         private List<SoundEmitter> _activeSoundEmitters;
         private Dictionary<SoundData, int> _soundCount;
 
-        [Inject] private SoundEmitter _soundEmitterPrefab;
+        [SerializeField] private SoundEmitter _soundEmitterPrefab;
 
         private void Awake()
         {
@@ -44,6 +44,15 @@ namespace Game.Audio
         public SoundEmitter Get() { return _soundEmitterPool.Get(); }
         public void Realise(SoundEmitter soundEmitter) { _soundEmitterPool.Release(soundEmitter); }
         public bool CanPlaySound(SoundData soundData) { return _soundCount.TryGetValue(soundData, out int count) && count < _maxSoundInstance; }
+
+        public void StopAllSound()
+        {
+            var cop = new List<SoundEmitter>(_activeSoundEmitters);
+            foreach (var e in cop)
+            {
+                e.Stop();
+            }
+        }
 
         private void InitializePool()
         {
