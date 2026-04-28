@@ -27,7 +27,7 @@ MonoBehaviour:
     AudioMixerGroup: {fileID: 0}
     IsLooping: 0
     PlayOnAwake: 0
-  Behavior: {fileID: 0}
+  Behavior: {fileID: 11400000, guid: ef2f15fa8e892554fb387873380bf5c9, type: 2}
   Characteristics:
     Damage: 1
-    Health: 1
+    Health: 2
