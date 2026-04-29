@@ -1,17 +1,12 @@
+using DG.Tweening;
 using Game.SceneLoaderSystem;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
-    //private const string LEVEL_SAVE = "LEVEL_INDEX_DATA";
     public static LevelController Instance { get; private set; }
-
-    [Header("Reference")]
-    [SerializeField] private Transform _player;
-    [SerializeField] private Transform _startPoint;
-    [SerializeField] private List<LevelButton> _levelButtons;
 
     [Header("Settings")]
     [SerializeField] private List<string> _levels;
@@ -21,36 +16,45 @@ public class LevelController : MonoBehaviour
 
     public int CurrentLevel { get; private set; } = 0;
 
+    private MapLevelContianer _temp;
+    private MapLevelContianer _contianer
+    {
+        get
+        {
+            if (_temp == null)
+            {
+                _temp = FindAnyObjectByType<MapLevelContianer>();
+            }
+
+            return _temp;
+        }
+    }
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            SceneManager.sceneLoaded += OnSceneLoaded;
             DontDestroyOnLoad(gameObject);
         }
-
         else { Destroy(gameObject); return; }
-
-        //CurrentLevel = PlayerPrefs.HasKey(LEVEL_SAVE) ? PlayerPrefs.GetInt(LEVEL_SAVE) : 0;
-    }
-
-    private void Start()
-    {
-        PlacePlayerInstant();
     }
 
     private void PlacePlayerInstant()
     {
+        if (_contianer == null) return;
+
         if (CurrentLevel == 0)
         {
-            _player.position = _startPoint.position;
+            _contianer._player.position = _contianer._startPoint.position;
             return;
         }
 
-        var btn = _levelButtons.Find(b => b.LevelIndex == CurrentLevel);
+        var btn = _contianer._levelButtons.Find(b => b.LevelIndex == CurrentLevel);
         if (btn != null)
         {
-            _player.position = btn.transform.position;
+            _contianer._player.position = btn.transform.position;
         }
     }
 
@@ -60,7 +64,7 @@ public class LevelController : MonoBehaviour
 
         SetButtonsInteractable(false);
 
-        _player.DOJump(button.transform.position, _jumpPower, _numJumps, _jumpDuration, true)
+        _contianer._player.DOJump(button.transform.position, _jumpPower, _numJumps, _jumpDuration, true)
                          .SetEase(Ease.Linear)
                          .OnComplete(() =>
                          {
@@ -71,12 +75,22 @@ public class LevelController : MonoBehaviour
 
     private void SetButtonsInteractable(bool value)
     {
-        foreach (var btn in _levelButtons)
+        foreach (var btn in _contianer._levelButtons)
             btn.GetComponent<UnityEngine.UI.Button>().interactable = value;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _temp = null;
+        PlacePlayerInstant();
     }
 
     private void OnDestroy()
     {
-        if (Instance == this) Instance = null;
+        if (Instance == this)
+        {
+            Instance = null;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+        }
     }
 }

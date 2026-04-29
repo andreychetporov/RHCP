@@ -332,11 +332,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f96ac068fcd8c44ab08a435f967f71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelController
-  _player: {fileID: 1158533127}
-  _startPoint: {fileID: 1520262567}
-  _levelButtons:
-  - {fileID: 1316417461601435211}
-  - {fileID: 1988789606}
   _levels:
   - Level1Scene
   - Level2Scene
@@ -714,6 +709,7 @@ GameObject:
   - component: {fileID: 936624568}
   - component: {fileID: 936624567}
   - component: {fileID: 936624566}
+  - component: {fileID: 936624572}
   - component: {fileID: 936624571}
   m_Layer: 5
   m_Name: Canvas
@@ -909,6 +905,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &936624572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936624565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58a63074862eeb34aa000dcf6b45806a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MapLevelContianer
+  _player: {fileID: 1158533127}
+  _startPoint: {fileID: 1520262567}
+  _levelButtons:
+  - {fileID: 1316417461601435211}
+  - {fileID: 1988789606}
 --- !u!1 &1158533126
 GameObject:
   m_ObjectHideFlags: 0
