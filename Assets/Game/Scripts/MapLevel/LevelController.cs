@@ -19,7 +19,7 @@ public class LevelController : MonoBehaviour
     [SerializeField] private float _jumpDuration = 0.6f;
     [SerializeField] private int _numJumps = 1;
 
-    public int CurrentLevel { get; private set; }
+    public int CurrentLevel { get; private set; } = 0;
 
     private void Awake()
     {
@@ -49,7 +49,9 @@ public class LevelController : MonoBehaviour
 
         var btn = _levelButtons.Find(b => b.LevelIndex == CurrentLevel);
         if (btn != null)
+        {
             _player.position = btn.transform.position;
+        }
     }
 
     public void GoToLevel(LevelButton button)
@@ -63,7 +65,6 @@ public class LevelController : MonoBehaviour
                          .OnComplete(() =>
                          {
                              CurrentLevel++;
-                             //PlayerPrefs.SetInt(LEVEL_SAVE, CurrentLevel);
                              SceneLoader.Instance.LoadScene(_levels[CurrentLevel - 1]);
                          });
     }

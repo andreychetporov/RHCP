@@ -119,6 +119,63 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &87249657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 37.39814
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -44.93576
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 130.48903
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130814581043827160, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7706884630287171354, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
+      propertyPath: m_Name
+      value: SceneLoader
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bd8c279eb4f75854386761424ee0a32f, type: 3}
 --- !u!1 &191014773
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,6 +303,61 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!1 &449195313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 449195315}
+  - component: {fileID: 449195314}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &449195314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449195313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f96ac068fcd8c44ab08a435f967f71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelController
+  _player: {fileID: 1158533127}
+  _startPoint: {fileID: 1520262567}
+  _levelButtons:
+  - {fileID: 1316417461601435211}
+  - {fileID: 1988789606}
+  _levels:
+  - Level1Scene
+  - Level2Scene
+  _jumpPower: 1
+  _jumpDuration: 2
+  _numJumps: 3
+--- !u!4 &449195315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 449195313}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515589461
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +714,6 @@ GameObject:
   - component: {fileID: 936624568}
   - component: {fileID: 936624567}
   - component: {fileID: 936624566}
-  - component: {fileID: 936624570}
   - component: {fileID: 936624571}
   m_Layer: 5
   m_Name: Canvas
@@ -701,29 +812,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &936624570
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 936624565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f96ac068fcd8c44ab08a435f967f71d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelController
-  _player: {fileID: 1158533127}
-  _startPoint: {fileID: 1520262567}
-  _levelButtons:
-  - {fileID: 1316417461601435211}
-  - {fileID: 1988789606}
-  _levels:
-  - Level1Scene
-  - Level2Scene
-  _jumpPower: 1
-  _jumpDuration: 2
-  _numJumps: 3
 --- !u!82 &936624571
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1489,7 +1577,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 782.392, y: -110}
+  m_AnchoredPosition: {x: 781.99084, y: -110}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1502610898890179318
@@ -1667,7 +1755,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 562.392, y: -110}
+  m_AnchoredPosition: {x: 561.99084, y: -110}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1987583959678662715
@@ -1801,7 +1889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.39203, y: -110}
+  m_AnchoredPosition: {x: 121.990845, y: -110}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2820495910149849912
@@ -2247,7 +2335,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 782.392, y: -330}
+  m_AnchoredPosition: {x: 781.99084, y: -330}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5074902490744814516
@@ -2876,7 +2964,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 342.39203, y: -110}
+  m_AnchoredPosition: {x: 341.99084, y: -110}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7525591044679029029
@@ -2998,7 +3086,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 562.392, y: -330}
+  m_AnchoredPosition: {x: 561.99084, y: -330}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8332006858648930862
@@ -3153,7 +3241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 122.39203, y: -330}
+  m_AnchoredPosition: {x: 121.990845, y: -330}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8607605370929223618
@@ -3303,7 +3391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 342.39203, y: -330}
+  m_AnchoredPosition: {x: 341.99084, y: -330}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8894217056093912612
@@ -3359,5 +3447,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 515589464}
   - {fileID: 191014775}
+  - {fileID: 449195315}
   - {fileID: 936624569}
   - {fileID: 1958260123}
+  - {fileID: 87249657}
