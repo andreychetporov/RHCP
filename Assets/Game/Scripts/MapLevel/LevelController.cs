@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    private const string LEVEL_SAVE = "LEVEL_INDEX_DATA";
+    //private const string LEVEL_SAVE = "LEVEL_INDEX_DATA";
     public static LevelController Instance { get; private set; }
 
     [Header("Reference")]
@@ -23,10 +23,15 @@ public class LevelController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
         else { Destroy(gameObject); return; }
 
-        CurrentLevel = PlayerPrefs.HasKey(LEVEL_SAVE) ? PlayerPrefs.GetInt(LEVEL_SAVE) : 0;
+        //CurrentLevel = PlayerPrefs.HasKey(LEVEL_SAVE) ? PlayerPrefs.GetInt(LEVEL_SAVE) : 0;
     }
 
     private void Start()
@@ -58,7 +63,7 @@ public class LevelController : MonoBehaviour
                          .OnComplete(() =>
                          {
                              CurrentLevel++;
-                             PlayerPrefs.SetInt(LEVEL_SAVE, CurrentLevel);
+                             //PlayerPrefs.SetInt(LEVEL_SAVE, CurrentLevel);
                              SceneLoader.Instance.LoadScene(_levels[CurrentLevel - 1]);
                          });
     }

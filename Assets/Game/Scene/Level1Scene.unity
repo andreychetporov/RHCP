@@ -5233,6 +5233,11 @@ MonoBehaviour:
     AudioMixerGroup: {fileID: -7561125664694016335, guid: bf68861df2bd3f64f8454be7835cf594, type: 2}
     IsLooping: 1
     PlayOnAwake: 1
+  _deathSound:
+    AudioResource: {fileID: 0}
+    AudioMixerGroup: {fileID: 0}
+    IsLooping: 0
+    PlayOnAwake: 0
 --- !u!1 &1272086947
 GameObject:
   m_ObjectHideFlags: 0
@@ -7028,6 +7033,7 @@ MonoBehaviour:
   _defaultCapacity: 10
   _maxPoolSize: 100
   _maxSoundInstance: 15
+  _soundEmitterPrefab: {fileID: 5401172264037176961, guid: 04f7c722bc0a0654e8bc16090064d83b, type: 3}
 --- !u!1001 &1649734724
 PrefabInstance:
   m_ObjectHideFlags: 0

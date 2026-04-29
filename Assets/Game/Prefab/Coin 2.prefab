@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coin
       objectReference: {fileID: 0}
+    - target: {fileID: 4035581224877538864, guid: 14d5b5f92ce5d0045ad07ee2e0a15741, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 105875f1da37e1f4a8cac58106b2dc7b, type: 2}
     - target: {fileID: 7157165815707934553, guid: 14d5b5f92ce5d0045ad07ee2e0a15741, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
