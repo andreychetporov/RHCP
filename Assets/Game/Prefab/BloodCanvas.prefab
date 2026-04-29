@@ -1,0 +1,161 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5859764145812692748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1402478582589975972}
+  - component: {fileID: 6435124101329864540}
+  - component: {fileID: 2762348708527714208}
+  - component: {fileID: 7300850943781377553}
+  - component: {fileID: 9104920113173982302}
+  m_Layer: 5
+  m_Name: BloodCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1402478582589975972
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859764145812692748}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!223 &6435124101329864540
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859764145812692748}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_UseReflectionProbes: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &2762348708527714208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859764145812692748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 1
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!114 &7300850943781377553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859764145812692748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &9104920113173982302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5859764145812692748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9381a21cde6f2c40b37769c709b057b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Blood.BloodCanvas
+  _bloodTypes:
+  - {fileID: 21300000, guid: 8e895b57e16a8c442a6e9ebfe2e9a1fb, type: 3}
+  - {fileID: 21300000, guid: 5df1469311eed8944ab358a7ebb5845e, type: 3}
+  - {fileID: 21300000, guid: 1f669d52c04d3db4c83e75493c7a2873, type: 3}
+  - {fileID: 21300000, guid: 811e42da5cbb1f349b4fb0e5bb12e396, type: 3}
+  - {fileID: 21300000, guid: 2178bb5babc8d8e4bab57c289fab2e58, type: 3}
+  - {fileID: 21300000, guid: cca15b9554a860c4db159181f42822d0, type: 3}
+  - {fileID: 21300000, guid: 7b3945790674fad4287240ea2ab7d581, type: 3}
+  - {fileID: 21300000, guid: d0840f7dff272984d8dced6b16e73cd1, type: 3}
+  - {fileID: 21300000, guid: 85e3380ed6cf7f9409c0d8a0a8dcdef2, type: 3}
+  - {fileID: 21300000, guid: 697b661d36ea4ca4db1e2e831f71257c, type: 3}
+  - {fileID: 21300000, guid: db3a9695781781845b1be0b48db7721e, type: 3}
+  - {fileID: 21300000, guid: 7c4ac8f980e1beb4a813408f28502c80, type: 3}
+  - {fileID: 21300000, guid: 46a48eb8eb1554047b44df6822a309dc, type: 3}
+  - {fileID: 21300000, guid: 52f8ed3aa7c6d22449bf9c79e3ea742c, type: 3}
+  - {fileID: 21300000, guid: e5692eeb13ea62e419d0d5459512c496, type: 3}
+  - {fileID: 21300000, guid: 9f43c605033f96545bf3bae8348bfe4b, type: 3}
+  - {fileID: 21300000, guid: d310f6573826b2045964e6feb3cab96b, type: 3}
+  - {fileID: 21300000, guid: a6cc61704afa3014bab0e4d8d48ef4ce, type: 3}
+  - {fileID: 21300000, guid: 8a03244988b9e734da972880881590e9, type: 3}
+  - {fileID: 21300000, guid: a8d0c0c2da5336648a607cce5926c9a4, type: 3}
+  - {fileID: 21300000, guid: 67813b225530bc441b85f34bd01c145d, type: 3}
+  - {fileID: 21300000, guid: b7b53fbbaf480c14c95239e09c77a0b3, type: 3}
+  - {fileID: 21300000, guid: 39bc6fa4cda6dbd4a851dfd1d5509b16, type: 3}
+  - {fileID: 21300000, guid: 02318e8e16ddb5a499ffbb9331a58d0e, type: 3}
+  - {fileID: 21300000, guid: b95a9f400e9395044b83bf02420dc535, type: 3}
+  - {fileID: 21300000, guid: 114d4fa824bc06f489bb5a5c6cabb764, type: 3}
+  - {fileID: 21300000, guid: 05c1966f0a6232640be40b44fbe578ab, type: 3}
+  - {fileID: 21300000, guid: 6d8ad87b88193d647886eedc9c713f56, type: 3}
+  - {fileID: 21300000, guid: 77c55181806fbbc47bf1bb2966a231fe, type: 3}
+  - {fileID: 21300000, guid: 42d1d13bdd31a714291b04faee47baf2, type: 3}
+  - {fileID: 21300000, guid: 0050104d2c8768747820e8f8df83b56b, type: 3}
+  - {fileID: 21300000, guid: 9ed691c70465e844eb31f1edc7eb6d9c, type: 3}
+  - {fileID: 21300000, guid: 32e3c66c7f2c5a043847368dafad583a, type: 3}
+  - {fileID: 21300000, guid: fdc010ec18f1b6449bfe63e38cedaf9e, type: 3}
+  - {fileID: 21300000, guid: 4537d7c2ed44e7a45b19c04b07afbca1, type: 3}
+  - {fileID: 21300000, guid: 7dbae5a39fbaac64ab9555fed851fde6, type: 3}
+  _saturationInterval: {x: 0.6, y: 1}
+  _scaleInterval: {x: 1, y: 5}
+  _centerDeadZoneRadius: 0.9
+  _collectionCheck: 1
+  _defaultCapacity: 10
+  _maxPoolSize: 50
+  _spotPrefab: {fileID: 792062606584044124, guid: 9d1d8de2f343577408f04c8ae2b8229d, type: 3}
