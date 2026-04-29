@@ -9,6 +9,7 @@ public class PlayerCoinsUI : MonoBehaviour
     private void Start()
     {
         playerStatsSO.Coins.OnValueChanged += OnCoinsAdded;
+        coinsAmount.text = playerStatsSO.Coins.Value.ToString();
     }
 
     private void OnCoinsAdded(int arg1, int newValue)
