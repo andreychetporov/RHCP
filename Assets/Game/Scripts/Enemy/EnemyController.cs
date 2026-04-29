@@ -87,6 +87,8 @@ namespace Game.Enemy
             SoundManager.Instance.Get().Initialize(EnemySO.DeathSFX).Play();
             SoundManager.Instance.Get().Initialize(EnemySO.TakeDamageSFX).Play();
 
+            BloodCanvas.Instance.SpawnBloodSpot(EnemySO.MainColor);
+
             CoinsManager.Instance.SpawnCoins(transform.position, EnemySO.coinsAmont);
             ParticlesManager.Instance.SpawnParticles(transform.position, EnemySO.ultaParticlesAmount);
 

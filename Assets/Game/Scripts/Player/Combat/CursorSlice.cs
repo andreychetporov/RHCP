@@ -6,6 +6,8 @@ using Game.Audio;
 [RequireComponent(typeof(TrailRenderer))]
 public class CursorSlice : MonoBehaviour
 {
+    [Header("TEst")]
+    [SerializeField] private WeaponSO _testWeapon;
 
     [SerializeField] private TrailRenderer _trail;
     [SerializeField] private float _sliceLenght = 100.0f;
@@ -23,6 +25,11 @@ public class CursorSlice : MonoBehaviour
     {
         if (_trail == null) { _trail = GetComponent<TrailRenderer>(); }
         _trail.emitting = false;
+
+        if (_testWeapon!= null)
+        {
+            SetWeapon(_testWeapon);
+        }
     }
 
     public void SetEmitting(bool isEmitting) => _trail.emitting = isEmitting;
