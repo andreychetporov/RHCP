@@ -11,8 +11,8 @@ public class PlayerUltaUI : MonoBehaviour
         playerStatsSO.UltaPoints.OnValueChanged += OnUltaPointsChanged;
     }
 
-    private void OnUltaPointsChanged(float arg1, float arg2)
+    private void OnUltaPointsChanged(float oldValue, float newValue)
     {
-        image.fillAmount += 0.01f;
+        image.fillAmount = newValue;
     }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a84aed2505fe1b408f3772287eae7df, type: 3}
+  m_Name: UltaWeapon
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
+  WeaponName: ulta
+  Description: ulta
+  Icon: {fileID: 21300000, guid: 09e4c6a7d75923945afe43953ef58ad2, type: 3}
+  TrailMaterial: {fileID: 2100000, guid: b1ca011c5f92d4fd4b5aeac44fd607c6, type: 2}
+  HitSound:
+    AudioResource: {fileID: 6418180475301049370, guid: 49e3f1da1ad301f44a3f9037489fb8d7, type: 2}
+    AudioMixerGroup: {fileID: 110151799328546220, guid: bf68861df2bd3f64f8454be7835cf594, type: 2}
+    IsLooping: 0
+    PlayOnAwake: 0
+  Damage: 10
+  DamageRadius: 100
+  Price: 0

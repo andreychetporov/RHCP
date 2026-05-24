@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private JumpMotor jumpMotor;
     [SerializeField] private PlayerHealth health;
     [SerializeField] private CursorSlice slice;
+    [SerializeField] private PlayerUlta ulta;
     [SerializeField] private Transform model;
     [SerializeField] private Rigidbody rb;
 
@@ -50,6 +51,9 @@ public class PlayerController : MonoBehaviour
 
         if (rb == null)
             rb = GetComponent<Rigidbody>();
+
+        if (ulta == null)
+            ulta = GetComponent<PlayerUlta>();
     }
 
     private void Start()
@@ -88,7 +92,20 @@ public class PlayerController : MonoBehaviour
         RotateCharacter();
     }
 
-    private void Update() => ManageSliceState();
+    private void Update()
+    {
+        ManageSliceState();
+
+        UltaState();
+    }
+
+    private void UltaState()
+    {
+        if (_input.UltaPressed)
+        {
+            ulta.ApplyUlta(EquipWeapon, weapon);
+        }
+    }
 
     private void ManageSliceState()
     {

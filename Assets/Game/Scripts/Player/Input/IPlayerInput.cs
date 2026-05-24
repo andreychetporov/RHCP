@@ -4,6 +4,7 @@ public interface IPlayerInput
     bool JumpReleased { get; }
     bool JumpHeld { get; }
     bool MousePressed { get; }
+    bool UltaPressed {  get; }
     void ConsumeJumpPressed();
     void ConsumeJumpReleased();
 }

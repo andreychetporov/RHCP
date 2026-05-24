@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public class UltaCanvas : MonoBehaviour
 {
+    [SerializeField] private GameEvent OnUltaStart;
+    [SerializeField] private GameEvent OnUltaEnd;
     private CanvasGroup _canvasGroup;
 
     private void Awake()
@@ -13,8 +15,11 @@ public class UltaCanvas : MonoBehaviour
 
     public void Start()
     {
+        OnUltaStart.OnInvoked += Show;
+        OnUltaEnd.OnInvoked += Hide;
         gameObject.SetActive(false);
     }
+
 
     public void Show()
     {

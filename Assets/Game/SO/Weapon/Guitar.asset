@@ -16,7 +16,7 @@ MonoBehaviour:
   Description: "\u041D\u0443 \u043E\u0431\u044B\u0447\u043D\u0430\u044F \u0434\u0435\u0440\u0435\u0432\u0435\u043D\u0441\u043A\u0430\u044F
     \u0433\u0438\u0442\u0430\u0440\u0430"
   Icon: {fileID: 21300000, guid: e90207a4a871d89489965926b4a6495c, type: 3}
-  TrailMaterial: {fileID: 2100000, guid: 209ea2f17ebe64e85a177a9bbad10476, type: 2}
+  TrailMaterial: {fileID: 2100000, guid: a4b2919529f88e345804ef0e7e13b9bf, type: 2}
   HitSound:
     AudioResource: {fileID: 0}
     AudioMixerGroup: {fileID: 0}

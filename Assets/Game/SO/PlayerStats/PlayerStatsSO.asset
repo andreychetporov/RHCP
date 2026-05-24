@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStatsSO
   availableWeapons:
   - {fileID: 11400000, guid: 861c7fbe16c9e604ab707dc8f9204294, type: 2}
-  currentWeapon: {fileID: 11400000, guid: 8495e086c26c3054e9640b4014c016e1, type: 2}
+  currentWeapon: {fileID: 11400000, guid: 861c7fbe16c9e604ab707dc8f9204294, type: 2}
