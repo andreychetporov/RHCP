@@ -11,6 +11,7 @@ public class UltaParticle : MonoBehaviour
     {
         if (speed <= 0.0f) speed = 10.0f;
     }
+
     public void Magnet(Vector3 playerPos)
     {
         transform.position = Vector3.MoveTowards(transform.position, LevelBootstrap.Instance.PlayerController.transform.position, speed * Time.deltaTime);

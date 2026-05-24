@@ -1,9 +1,7 @@
-using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class Magnet : MonoBehaviour
 {
-
     private void OnTriggerStay(Collider other)
     {
         UltaParticle ultaParticle = other.GetComponent<UltaParticle>();
@@ -12,4 +10,9 @@ public class Magnet : MonoBehaviour
             ultaParticle.Magnet(transform.position);
         }
     }
+    private void OnDisable()
+    {
+        Debug.Log($"Magnet disabled! Stack: {StackTraceUtility.ExtractStackTrace()}", this);
+    }
+
 }

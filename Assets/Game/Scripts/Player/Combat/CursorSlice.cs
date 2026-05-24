@@ -13,7 +13,7 @@ public class CursorSlice : MonoBehaviour
     [SerializeField] private float _sliceLenght = 100.0f;
     [SerializeField] private float _distanceFromCamera = 10.0f;
 
-    [SerializeField] private LayerMask ignoreMask;
+    [SerializeField] private LayerMask _ignoreMask;
     private WeaponSO weapon;
 
 
@@ -58,9 +58,9 @@ public class CursorSlice : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        if (Physics.SphereCast(ray, 0.5f, out RaycastHit hit, 1000.0f))
-
+        if (Physics.SphereCast(ray, 0.5f, out RaycastHit hit, 1000.0f, ~_ignoreMask))
         {
+            Debug.Log($"HIT{hit.collider.gameObject.name}");
             EnemyController enemy = hit.collider.GetComponentInParent<EnemyController>();
             if (enemy != null)
             {
