@@ -53,6 +53,23 @@ namespace Game.Audio
             }
         }
 
+        public void PauseAllSounds()
+        {
+            var cop = new List<SoundEmitter>(_activeSoundEmitters);
+            foreach (var e in cop)
+            {
+                e.Pause();
+            }
+        }
+        public void UnPauseAllSounds()
+        {
+            var cop = new List<SoundEmitter>(_activeSoundEmitters);
+            foreach (var e in cop)
+            {
+                e.UnPause();
+            }
+        }
+
         private void InitializePool()
         {
             _soundEmitterPool = new ObjectPool<SoundEmitter>

@@ -4,16 +4,22 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
 public class LobbyManager : MonoBehaviour
 {
     [Header("Reference")]
     [SerializeField] private TMP_Text _continueText;
+    private void OnEnable()
+    {
+        InputSystem.onAnyButtonPress.CallOnce(OnAnyButtonPressed);
+    }
 
     private void Start()
     {
         float alpha = 0.0f;
-
+        LevelController.Instance.CurrentLevel = 0;
         DOTween.To(() => alpha, a => alpha = a, 1.0f, 1.0f)
                .OnUpdate(() =>
                {
@@ -25,12 +31,10 @@ public class LobbyManager : MonoBehaviour
                .SetEase(Ease.InOutSine);
     }
 
-    private void Update()
+
+    private void OnAnyButtonPressed(InputControl control)
     {
-        if (Input.anyKeyDown)
-        {
-            SceneLoader.Instance.LoadScene(SceneEnum.MapLevel);
-        }
+        SceneLoader.Instance.LoadScene(SceneEnum.MapLevel);
     }
 
     public void Quit()

@@ -5,8 +5,10 @@ using Game.SceneLoaderSystem;
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
+using UnityEngine.SceneManagement;
 using Zenject;
-
 namespace Game.Level
 {
     public class LevelBootstrap : MonoBehaviour
@@ -26,6 +28,7 @@ namespace Game.Level
         [Header("DeathSound")]
         [SerializeField] private SoundData _deathSound;
 
+        [SerializeField] GameObject tutorialCanvas;
         public PlayerController PlayerController { get; private set; }
 
         [Inject] public IEnemySliceFactory EnemySliceFactory { get; private set; }
@@ -65,12 +68,14 @@ namespace Game.Level
 
                 SceneLoader.Instance.LoadScene(SceneEnum.MapLevel);
             };
+            if (tutorialCanvas != null)
+            {
+                SceneLoader.Instance.OnTransitionComplete += OpenTutorial;
+                InputSystem.onAnyButtonPress.CallOnce(CloseTutorial);
+            }
 
         }
 
-        private void Start()
-        {
-        }
 
         private void Update()
         {
@@ -94,36 +99,65 @@ namespace Game.Level
         public void StartRun()
         {
             if (IsRunStarted) { return; }
-
+            SoundManager.Instance.Get().Initialize(_ambient).Play();
             IsRunStarted = true;
             IsRunFinished = false;
             CurrentTime = 0f;
 
-            SoundManager.Instance.Get().Initialize(_ambient).Play();
-
-            Debug.Log("Забег начался");
             OnRunStarted?.Invoke();
+        }
+
+        private void OpenTutorial()
+        {
+            if (tutorialCanvas != null)
+            {
+                SoundManager.Instance.PauseAllSounds();
+                tutorialCanvas.SetActive(true);
+                Time.timeScale = 0.0f;
+            }
+        }
+        private void CloseTutorial(InputControl control)
+        {
+            if (tutorialCanvas != null)
+            {
+                Time.timeScale = 1.0f;
+                SoundManager.Instance.UnPauseAllSounds();
+                tutorialCanvas.SetActive(false);
+            }
         }
 
         public void FinishRun()
         {
-            if (!IsRunStarted || IsRunFinished) { return; }
+            if (IsRunFinished) { return; }
 
             IsRunFinished = true;
 
-            Debug.Log($"Забег завершён. Время: {CurrentTime:F2} сек");
             OnRunFinished?.Invoke(CurrentTime);
+
+            SoundManager.Instance.StopAllSound();
+            if (LevelController.Instance != null)
+            {
+
+                if (LevelController.Instance.IsFinalLevel())
+                {
+                    Debug.Log("[FinishRun] Это был финальный уровень! Переход в главное меню.");
+
+                    SceneLoader.Instance.LoadScene(SceneEnum.MainLevel);
+                    return;
+                }
+
+                LevelController.Instance.CompleteCurrentLevel();
+            }
 
             SceneLoader.Instance.LoadScene(SceneEnum.MapLevel);
         }
-
         public void ResetRun()
         {
             IsRunStarted = false;
             IsRunFinished = false;
             CurrentTime = 0f;
+            SoundManager.Instance.StopAllSound();
 
-            Debug.Log("Забег сброшен");
         }
 
         public void OnDestroy()

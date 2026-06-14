@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e461cb543ab4e3a449908e51f2b84801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UltaCanvas
+  OnUltaStart: {fileID: 11400000, guid: 1611f8998164f694abeb37a47aa847be, type: 2}
+  OnUltaEnd: {fileID: 11400000, guid: 920318b71b1a2024fa16564927c3891e, type: 2}
 --- !u!1 &2855703399750776997
 GameObject:
   m_ObjectHideFlags: 0

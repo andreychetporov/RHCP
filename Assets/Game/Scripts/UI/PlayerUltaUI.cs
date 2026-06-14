@@ -3,16 +3,31 @@ using UnityEngine.UI;
 
 public class PlayerUltaUI : MonoBehaviour
 {
-    [SerializeField] Image image;
-    [SerializeField] PlayerStatsSO playerStatsSO;
+    [SerializeField] private Image image;
+    [SerializeField] private PlayerStatsSO playerStatsSO;
 
     private void Start()
     {
-        playerStatsSO.UltaPoints.OnValueChanged += OnUltaPointsChanged;
+        if (playerStatsSO != null && playerStatsSO.UltaPoints != null)
+        {
+            playerStatsSO.UltaPoints.OnValueChanged += OnUltaPointsChanged;
+
+        }
     }
 
     private void OnUltaPointsChanged(float oldValue, float newValue)
     {
-        image.fillAmount = newValue;
+        if (image != null)
+        {
+            image.fillAmount = newValue;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (playerStatsSO != null && playerStatsSO.UltaPoints != null)
+        {
+            playerStatsSO.UltaPoints.OnValueChanged -= OnUltaPointsChanged;
+        }
     }
 }

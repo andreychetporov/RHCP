@@ -20,7 +20,7 @@ public class FinishZone : MonoBehaviour
     {
         if (!other.CompareTag(_playerTag)) { return; }
 
-        if (_requireStartedRun && !LevelBootstrap.Instance.IsRunStarted) { return; }
+        //if (_requireStartedRun && !LevelBootstrap.Instance.IsRunStarted) { return; }
 
         LevelBootstrap.Instance.FinishRun();
     }

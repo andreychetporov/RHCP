@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Game.Audio
     {
         private AudioSource _audioSource;
         private Coroutine _playingCoroutine;
-
+        private bool _isPaused = false;
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
@@ -30,10 +31,22 @@ namespace Game.Audio
             _audioSource.Stop();
             SoundManager.Instance.Realise(this);
         }
+        public void Pause()
+        {
+            _isPaused = true;
+
+            _audioSource.Pause();
+        }
+        public void UnPause()
+        {
+            _isPaused = false;
+
+            _audioSource.UnPause();
+        }
 
         private IEnumerator WaitForSoundToEnd()
         {
-            yield return new WaitWhile(() => _audioSource.isPlaying);
+            yield return new WaitWhile(() => _audioSource.isPlaying || _isPaused);
 
             SoundManager.Instance.Realise(this);
         }

@@ -10,7 +10,7 @@ public class UltaCanvas : MonoBehaviour
 
     private void Awake()
     {
-        _canvasGroup = GetComponent<CanvasGroup>();    
+        _canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public void Start()
@@ -19,12 +19,15 @@ public class UltaCanvas : MonoBehaviour
         OnUltaEnd.OnInvoked += Hide;
         gameObject.SetActive(false);
     }
-
+    private void OnDestroy()
+    {
+        if (OnUltaStart != null) OnUltaStart.OnInvoked -= Show;
+        if (OnUltaEnd != null) OnUltaEnd.OnInvoked -= Hide;
+    }
 
     public void Show()
     {
         gameObject.SetActive(true);
-
         _canvasGroup.DOFade(1.0f, 0.15f).From(0.0f);
     }
 

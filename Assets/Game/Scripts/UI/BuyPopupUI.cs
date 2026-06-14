@@ -35,6 +35,7 @@ public class BuyPopupUI : MonoBehaviour
         if (playerStatsSO.Coins.Value < weapon.Price || playerStatsSO.availableWeapons.Contains(weapon)) return;
         playerStatsSO.Coins.Value -= weapon.Price;
         playerStatsSO.availableWeapons.Add(weapon);
+        playerStatsSO.currentWeapon = weapon;
         slot.gameObject.SetActive(false);
         ClosePopup();
     }

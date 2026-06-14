@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95f09e14ae1b8034d9ff7d3057ec58d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUlta
-  ultaActivatePointsAmount: 10
+  ultaActivatePointsAmount: 30
   ultaDuration: 5
   ultaWeapon: {fileID: 11400000, guid: c96171c7c630c0244af890b634a292a2, type: 2}
   ultaVFX: {fileID: 5303990660413618071}

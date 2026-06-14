@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Game.Audio;
 using Game.SceneLoaderSystem;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,8 +14,8 @@ public class LevelController : MonoBehaviour
     [SerializeField] private float _jumpPower = 2f;
     [SerializeField] private float _jumpDuration = 0.6f;
     [SerializeField] private int _numJumps = 1;
-
-    public int CurrentLevel { get; private set; } = 0;
+    [SerializeField] private SoundData ambient;
+    public int CurrentLevel { get; set; } = 0;
 
     private MapLevelContianer _temp;
     private MapLevelContianer _contianer
@@ -68,15 +69,30 @@ public class LevelController : MonoBehaviour
                          .SetEase(Ease.Linear)
                          .OnComplete(() =>
                          {
-                             CurrentLevel++;
-                             SceneLoader.Instance.LoadScene(_levels[CurrentLevel - 1]);
+                             SoundManager.Instance.StopAllSound();
+                             SceneLoader.Instance.LoadScene(_levels[button.LevelIndex - 1]);
                          });
+    }
+
+    public void CompleteCurrentLevel()
+    {
+        CurrentLevel++;
+    }
+
+    public bool IsFinalLevel()
+    {
+        return CurrentLevel == (_levels.Count - 1);
     }
 
     private void SetButtonsInteractable(bool value)
     {
+        if (_contianer == null || _contianer._levelButtons == null) return;
+
         foreach (var btn in _contianer._levelButtons)
-            btn.GetComponent<UnityEngine.UI.Button>().interactable = value;
+        {
+            if (btn != null && btn.GetComponent<UnityEngine.UI.Button>() != null)
+                btn.GetComponent<UnityEngine.UI.Button>().interactable = value;
+        }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)

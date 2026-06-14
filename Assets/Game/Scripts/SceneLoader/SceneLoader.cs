@@ -12,6 +12,7 @@ namespace Game.SceneLoaderSystem
         public event Action OnStartLoadTargetScene;
         public event Action<float> OnLoadingProgress;
         public event Action OnFinishLoadTargetScene;
+        public event Action OnTransitionComplete;
 
         [Header("References")]
         [SerializeField] private BaseFade _fade;
@@ -70,6 +71,7 @@ namespace Game.SceneLoaderSystem
 
             OnFinishLoadTargetScene?.Invoke();
             yield return FadeInRoutine();
+            OnTransitionComplete?.Invoke();
         }
 
         private IEnumerator FadeOutRoutine()
